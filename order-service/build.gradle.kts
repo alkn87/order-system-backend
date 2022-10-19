@@ -1,0 +1,67 @@
+val kotlinVersion= project.properties["kotlinVersion"]
+
+plugins {
+    id("org.jetbrains.kotlin.jvm") version "1.7.20"
+    id("org.jetbrains.kotlin.kapt") version "1.7.20"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.20"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.6.2"
+}
+
+version = "0.1"
+group = "at.fhcampuswien.dev.we"
+
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("at.fhcampuswien.dev.we.*")
+    }
+}
+
+dependencies {
+    kapt("io.micronaut:micronaut-http-validation")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("jakarta.inject:jakarta.inject-api:2.0.1")
+    implementation("javax.inject:javax.inject:1")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.rabbitmq:micronaut-rabbitmq")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    compileOnly("org.graalvm.nativeimage:svm")
+}
+
+
+application {
+    mainClass.set("at.fhcampuswien.dev.we.ApplicationKt")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+}
+
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
+}
+
+
+
+
