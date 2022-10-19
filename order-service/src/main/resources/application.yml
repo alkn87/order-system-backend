@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: orderService
+  server:
+    port: 8081
+rabbitmq:
+  uri: amqp://${RABBITMQ_HOST}:5672
+  username: "guest"
+  password: "guest"
