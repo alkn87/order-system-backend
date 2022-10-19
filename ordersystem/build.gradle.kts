@@ -49,6 +49,11 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
+tasks.getByName<Jar>("jar") {
+	enabled = false
+	archiveClassifier.set("")
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }

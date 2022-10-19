@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+#    order-system:
+#        build: ./ordersystem/.
+#        ports:
+#            - "8080:8080"
+#        container_name: ordersystem
+#        depends_on:
+#            - rabbitmq
+    api-gateway:
+        build: ./api-gateway/.
+        ports:
+            - "8080:8080"
+        container_name: api-gateway
+        depends_on:
+            - rabbitmq
+        environment:
+            RABBITMQ_HOST: "rabbitmq"
+    order-service:
+        build: ./order-service/.
+        ports:
+            - "8081:8081"
+        container_name: order-service
+        depends_on:
+            - rabbitmq
+        environment:
+            RABBITMQ_HOST: "rabbitmq"
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            # AMQP protocol port
+            - "5672:5672"
+            # HTTP management UI
+            - "15672:15672"

@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: apiGateway
+  server:
+    port: 8080
+rabbitmq:
+  uri: amqp://${RABBITMQ_HOST}:5672
+  username: "guest"
+  password: "guest"
+

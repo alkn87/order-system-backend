@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: api.gateway
+testFramework: junit
+sourceLanguage: kotlin
+buildTool: gradle
+features: [app-name, graalvm, gradle, http-client, junit, kotlin, kotlin-application, logback, netty-server, rabbitmq, readme, shade, yaml]
