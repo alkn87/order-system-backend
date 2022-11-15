@@ -6,7 +6,7 @@ import java.util.*
 
 
 @Singleton
-class OrderService(val messageProducerService: MessageProducerService) {
+class OrderService(private val messageProducerService: MessageProducerService) {
 
     companion object {
         private val Orders = listOf(

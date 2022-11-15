@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "1.7.20"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.7.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.6.2"
+    id("io.micronaut.application") version "3.6.3"
 }
 
 version = "0.1"
@@ -26,7 +26,15 @@ micronaut {
 }
 
 dependencies {
+    // shared lib
+    implementation(project(":cqrs")) {
+        exclude(group = "org.junit", module="junit-jupiter-api")
+        exclude(group = "org.junit", module="junit-jupiter-engine")
+    }
+
     kapt("io.micronaut:micronaut-http-validation")
+    kapt("io.micronaut.data:micronaut-data-document-processor")
+    implementation("io.micronaut.data:micronaut-data-mongodb")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -38,7 +46,10 @@ dependencies {
     implementation("io.micronaut.rabbitmq:micronaut-rabbitmq")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    runtimeOnly("org.mongodb:mongodb-driver-sync")
     compileOnly("org.graalvm.nativeimage:svm")
+    testImplementation("org.testcontainers:mongodb")
+    testImplementation("org.testcontainers:testcontainers")
 }
 
 

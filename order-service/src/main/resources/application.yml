@@ -2,8 +2,13 @@ micronaut:
   application:
     name: orderService
   server:
-    port: 8081
+    port: 8181
+  data:
+    mongodb:
+      create-collections: true
 rabbitmq:
   uri: amqp://${RABBITMQ_HOST}:5672
   username: "guest"
   password: "guest"
+mongodb:
+  uri: mongodb://root:example@localhost:27017/order?authSource=admin
