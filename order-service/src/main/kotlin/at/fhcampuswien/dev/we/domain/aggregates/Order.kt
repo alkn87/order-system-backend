@@ -1,4 +1,4 @@
-package at.fhcampuswien.dev.we.model
+package at.fhcampuswien.dev.we.domain.aggregates
 
 import io.micronaut.core.annotation.Introspected
 import io.micronaut.data.annotation.GeneratedValue
@@ -7,8 +7,10 @@ import io.micronaut.data.annotation.MappedEntity
 
 @MappedEntity
 data class Order (
-    var name: String,
-    var description: String,
+    var stationId: String,
+    var deliverTo: String,
+    var orderItems: List<OrderItem>,
+    var orderStatus: OrderStatus = OrderStatus.CREATED,
     @field:Id
     @GeneratedValue
     var id: String? = ""

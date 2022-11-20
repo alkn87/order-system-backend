@@ -1,7 +1,8 @@
 package at.fhcampuswien.dev.we.controller
 
-import at.fhcampuswien.dev.we.model.Order
-import at.fhcampuswien.dev.we.model.TestOrder
+import at.fhcampuswien.dev.we.domain.aggregates.Order
+import at.fhcampuswien.dev.we.domain.aggregates.OrderItem
+import at.fhcampuswien.dev.we.domain.aggregates.TestOrder
 import at.fhcampuswien.dev.we.repository.OrderRepository
 import io.micronaut.core.annotation.NonNull
 import io.micronaut.http.HttpStatus.CREATED
@@ -30,7 +31,16 @@ open class OrderController(private val orderRepository: OrderRepository) {
     @Consumes(MediaType.APPLICATION_JSON)
     open fun save(@NonNull @NotNull @Valid order: TestOrder) {
         logger.info("order: $order")
-        orderRepository.save(Order("test22", "Hallo new desc"))
+        orderRepository.save(
+            Order(
+                "test22",
+                "Table 1",
+                listOf(
+                    OrderItem("itemId12", "Sandwich", 2.99, 1),
+                    OrderItem("itemId34", "Water", 2.99, 1)
+                )
+            )
+        )
     }
 
 }

@@ -1,5 +1,6 @@
 package at.fhcampuswien.dev.we.messaging
 
+import at.fhcampuswien.dev.we.api.model.OrderItemDTO
 import at.fhcampuswien.dev.we.cqrs.command.CommandBus
 import at.fhcampuswien.dev.we.domain.command.CreateOrderCommand
 import io.micronaut.context.annotation.Requires
@@ -18,6 +19,14 @@ class MessageConsumerService(private val commandBus: CommandBus) {
     @Queue("order-commands")
     fun onReceived(data: ByteArray) {
         logger.info("order-service - data received: $data")
-        commandBus.dispatch(CreateOrderCommand("Table 1"))
+        commandBus.dispatch(
+            CreateOrderCommand(
+                "Table 1",
+                "station1",
+                listOf(
+                    OrderItemDTO("asd", "prod12", "Sandwich", 2.99, 1)
+                )
+            )
+        )
     }
 }
