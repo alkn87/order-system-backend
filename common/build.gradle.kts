@@ -3,7 +3,7 @@ val kotlinVersion= project.properties["kotlinVersion"]
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
     id("org.jetbrains.kotlin.kapt") version "1.7.21"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.20"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.21"
 }
 
 group = "at.fhcampuswien.dev.we"
