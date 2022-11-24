@@ -24,7 +24,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    compileOnly("io.micronaut:micronaut-inject:3.7.1")
+    compileOnly("io.micronaut:micronaut-inject:3.7.4")
 }
 
 tasks.getByName<Test>("test") {
