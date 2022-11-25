@@ -1,7 +1,6 @@
-package at.fhcampuswien.dev.we.api.model
+package at.fhcampuswien.dev.we.order
 
 data class OrderItemDTO(
-    val id: String,
     val productId: String,
     val productName: String,
     val unitPrice: Double,

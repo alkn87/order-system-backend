@@ -1,8 +1,9 @@
 package at.fhcampuswien.dev.we.messaging
 
-import at.fhcampuswien.dev.we.api.model.OrderItemDTO
 import at.fhcampuswien.dev.we.cqrs.command.CommandBus
+import at.fhcampuswien.dev.we.domain.aggregates.OrderItem
 import at.fhcampuswien.dev.we.domain.command.CreateOrderCommand
+import at.fhcampuswien.dev.we.order.OrderDTO
 import io.micronaut.context.annotation.Requires
 import io.micronaut.context.env.Environment
 import io.micronaut.rabbitmq.annotation.Queue
@@ -17,15 +18,15 @@ class MessageConsumerService(private val commandBus: CommandBus) {
     private val logger: Logger = LoggerFactory.getLogger(MessageConsumerService::class.java)
 
     @Queue("order-commands")
-    fun onReceived(data: ByteArray) {
-        logger.info("order-service - data received: $data")
+    fun onReceived(order: OrderDTO) {
+        logger.info("order-service - data received: $order")
         commandBus.dispatch(
             CreateOrderCommand(
                 "Table 1",
                 "station1",
-                listOf(
-                    OrderItemDTO("asd", "prod12", "Sandwich", 2.99, 1)
-                )
+                order.orderItems.map {
+                    OrderItem(it.productId, it.productName, it.unitPrice, it.quantity)
+                }
             )
         )
     }
