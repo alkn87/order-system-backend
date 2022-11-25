@@ -17,7 +17,7 @@ import org.testcontainers.containers.MongoDBContainer
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
 
-@MicronautTest
+@MicronautTest(transactional=false)
 @Testcontainers
 class OrderServiceTest {
 
