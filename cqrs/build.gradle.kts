@@ -1,10 +1,9 @@
-val kotlinVersion= project.properties["kotlinVersion"]
+val kotlinVersion=project.properties["kotlinVersion"]
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.7.21"
-    id("org.jetbrains.kotlin.kapt") version "1.7.20"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.21"
-    id("io.micronaut.library") version "3.6.3"
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.allopen")
+    id("io.micronaut.library")
 }
 
 group = "at.fhcampuswien.dev.we"
@@ -15,7 +14,10 @@ repositories {
 }
 
 micronaut {
-    version("3.6.3")
+    processing {
+        incremental(true)
+        annotations("at.fhcampuswien.dev.we.*")
+    }
 }
 
 dependencies {
