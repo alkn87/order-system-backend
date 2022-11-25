@@ -1,11 +1,11 @@
 val kotlinVersion= project.properties["kotlinVersion"]
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.7.21"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.21"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.6.5"
-    id("org.jetbrains.kotlin.kapt") version "1.7.21"
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.allopen")
+    id("com.github.johnrengelman.shadow")
+    id("io.micronaut.application")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 version = "0.1"
