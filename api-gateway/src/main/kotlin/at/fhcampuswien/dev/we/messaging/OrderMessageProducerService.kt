@@ -1,11 +1,11 @@
 package at.fhcampuswien.dev.we.messaging
 
-import at.fhcampuswien.dev.we.order.OrderDTO
+import at.fhcampuswien.dev.we.order.model.order.OrderDTO
 import io.micronaut.rabbitmq.annotation.Binding
 import io.micronaut.rabbitmq.annotation.RabbitClient
 
 @RabbitClient("order")
-interface MessageProducerService {
+interface OrderMessageProducerService {
     @Binding("order.command")
     fun send(order: OrderDTO)
 }

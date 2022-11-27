@@ -1,20 +1,11 @@
 ###
-POST http://localhost:8080/book/add
-Content-Type: application/json
-
-{
-  "id": 0,
-  "title": "Das Ewige Leben",
-  "author": "Wolf Haas"
-}
-
-
+GET http://localhost:8180/order/create
 
 ###
-POST http://localhost:8181/orders
+POST http://localhost:8180/product/create
 Content-Type: application/json
 
 {
-  "name": "testName",
-  "description": "Das Ewige Leben"
+  "productName": "testName",
+  "productPrice": 3.33
 }

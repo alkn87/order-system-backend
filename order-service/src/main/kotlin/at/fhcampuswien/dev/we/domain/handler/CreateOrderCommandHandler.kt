@@ -17,8 +17,8 @@ open class CreateOrderCommandHandler(private val orderRepository: OrderRepositor
 
     @Async
     override fun handle(command: CreateOrderCommand) {
-        logger.info("handled CreateOrderCommand: ${command.deliverTo}")
         val order = Order(command.stationId, command.deliverTo, command.orderItems, OrderStatus.CREATED)
         orderRepository.save(order)
+        logger.info("handled CreateOrderCommand: $command")
     }
 }

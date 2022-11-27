@@ -1,13 +1,13 @@
-package at.fhcampuswien.dev.we
+package at.fhcampuswien.dev.we.resource.order
 
-import at.fhcampuswien.dev.we.messaging.MessageProducerService
-import at.fhcampuswien.dev.we.order.OrderDTO
-import at.fhcampuswien.dev.we.order.OrderItemDTO
+import at.fhcampuswien.dev.we.messaging.OrderMessageProducerService
+import at.fhcampuswien.dev.we.order.model.order.OrderDTO
+import at.fhcampuswien.dev.we.order.model.order.OrderItemDTO
 import jakarta.inject.Singleton
 
 
 @Singleton
-class OrderService(private val messageProducerService: MessageProducerService) {
+class OrderService(private val messageProducerService: OrderMessageProducerService) {
 
     fun createOrder(): OrderDTO {
         val order = OrderDTO(

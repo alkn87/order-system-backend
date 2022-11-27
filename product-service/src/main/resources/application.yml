@@ -1,0 +1,14 @@
+micronaut:
+  application:
+    name: productService
+  server:
+    port: 8182
+  data:
+    mongodb:
+      create-collections: true
+rabbitmq:
+  uri: amqp://${RABBITMQ_HOST}:5672
+  username: "guest"
+  password: "guest"
+mongodb:
+  uri: mongodb://root:example@localhost:27017/order?authSource=admin

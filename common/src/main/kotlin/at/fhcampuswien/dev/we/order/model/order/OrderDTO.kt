@@ -1,4 +1,4 @@
-package at.fhcampuswien.dev.we.order
+package at.fhcampuswien.dev.we.order.model.order
 
 data class OrderDTO(
     var stationId: String,
