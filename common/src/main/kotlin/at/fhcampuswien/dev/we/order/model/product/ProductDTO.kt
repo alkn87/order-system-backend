@@ -1,3 +1,14 @@
 package at.fhcampuswien.dev.we.order.model.product
 
-data class ProductDTO(val productName: String, val productPrice: Double)
+import io.micronaut.core.annotation.Introspected
+import javax.validation.constraints.NotBlank
+
+@Introspected
+data class ProductDTO(
+    @NotBlank
+    val productName: String,
+    @NotBlank
+    val productPrice: Double,
+    @NotBlank
+    val productType: String
+    )

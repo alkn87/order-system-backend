@@ -1,11 +1,32 @@
 ###
-GET http://localhost:8180/order/create
+POST http://localhost:8180/order/create
+Content-Type: application/json
+
+{
+  "stationId": "station1",
+  "deliverTo": "Table 1",
+  "orderItems": [
+    {
+      "productId": "F1",
+      "productName": "Burger",
+      "unitPrice": 5.9,
+      "quantity": 2
+    },
+    {
+      "productId": "D1",
+      "productName": "Coke",
+      "unitPrice": 2.9,
+      "quantity": 3
+    }
+  ]
+}
 
 ###
 POST http://localhost:8180/product/create
 Content-Type: application/json
 
 {
-  "productName": "testName",
-  "productPrice": 3.33
+  "productName": "Coke",
+  "productPrice": 3.33,
+  "productType": "DRINK"
 }
