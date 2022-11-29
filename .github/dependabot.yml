@@ -25,3 +25,7 @@ updates:
     directory: "/order-service" # Location of package manifests
     schedule:
       interval: "weekly"
+  - package-ecosystem: "gradle" # See documentation for possible values
+    directory: "/product-service" # Location of package manifests
+    schedule:
+      interval: "weekly"

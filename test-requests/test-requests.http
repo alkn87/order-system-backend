@@ -1,20 +1,32 @@
 ###
-POST http://localhost:8080/book/add
+POST http://localhost:8180/order/create
 Content-Type: application/json
 
 {
-  "id": 0,
-  "title": "Das Ewige Leben",
-  "author": "Wolf Haas"
+  "stationId": "station1",
+  "deliverTo": "Table 1",
+  "orderItems": [
+    {
+      "productId": "F1",
+      "productName": "Burger",
+      "unitPrice": 5.9,
+      "quantity": 2
+    },
+    {
+      "productId": "D1",
+      "productName": "Coke",
+      "unitPrice": 2.9,
+      "quantity": 3
+    }
+  ]
 }
 
-
-
 ###
-POST http://localhost:8181/orders
+POST http://localhost:8180/product/create
 Content-Type: application/json
 
 {
-  "name": "testName",
-  "description": "Das Ewige Leben"
+  "productName": "Coke",
+  "productPrice": 3.33,
+  "productType": "DRINK"
 }

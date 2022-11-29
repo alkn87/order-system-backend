@@ -32,6 +32,11 @@ dependencies {
         exclude(group = "org.junit", module="junit-jupiter-engine")
     }
 
+    implementation(project(":common")) {
+        exclude(group = "org.junit", module="junit-jupiter-api")
+        exclude(group = "org.junit", module="junit-jupiter-engine")
+    }
+
     kapt("io.micronaut:micronaut-http-validation")
     kapt("io.micronaut.data:micronaut-data-document-processor")
     implementation("io.micronaut.data:micronaut-data-mongodb")

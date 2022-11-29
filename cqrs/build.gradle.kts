@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.plugin.allopen")
     id("io.micronaut.library")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 group = "at.fhcampuswien.dev.we"

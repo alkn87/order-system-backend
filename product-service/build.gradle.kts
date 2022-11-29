@@ -1,4 +1,4 @@
-val kotlinVersion= project.properties["kotlinVersion"]
+val kotlinVersion=project.properties["kotlinVersion"]
 
 plugins {
     id("org.jetbrains.kotlin.jvm")
@@ -31,12 +31,15 @@ dependencies {
         exclude(group = "org.junit", module="junit-jupiter-api")
         exclude(group = "org.junit", module="junit-jupiter-engine")
     }
+
     implementation(project(":common")) {
         exclude(group = "org.junit", module="junit-jupiter-api")
         exclude(group = "org.junit", module="junit-jupiter-engine")
     }
 
     kapt("io.micronaut:micronaut-http-validation")
+    kapt("io.micronaut.data:micronaut-data-document-processor")
+    implementation("io.micronaut.data:micronaut-data-mongodb")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -48,9 +51,12 @@ dependencies {
     implementation("io.micronaut.rabbitmq:micronaut-rabbitmq")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    runtimeOnly("org.mongodb:mongodb-driver-sync")
     compileOnly("org.graalvm.nativeimage:svm")
-    testImplementation("org.mockito:mockito-core:4.9.0")
-
+    testImplementation("org.testcontainers:mongodb")
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.testcontainers:testcontainers:1.17.6")
+    testImplementation("org.testcontainers:junit-jupiter:1.17.6")
 }
 
 

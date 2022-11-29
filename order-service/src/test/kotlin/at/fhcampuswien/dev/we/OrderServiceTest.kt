@@ -40,8 +40,8 @@ class OrderServiceTest {
                 )
             )
         )
-        assertEquals(repository.findAll().count(), 1)
-        assertEquals(repository.findAll().first().stationId, "test22")
+        assertEquals(1, repository.findAll().count())
+        assertEquals("test22", repository.findAll().first().stationId)
     }
 
     @AfterEach
