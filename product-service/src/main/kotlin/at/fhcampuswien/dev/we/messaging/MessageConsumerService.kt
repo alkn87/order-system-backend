@@ -22,7 +22,8 @@ class MessageConsumerService(private val commandBus: CommandBus) {
         commandBus.dispatch(
             CreateProductCommand(
                 "Coke",
-                2.50
+                2.50,
+                "DRINK"
             )
         )
     }
