@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateProductComponent } from './create-product.component';
+import { SharedModule } from '../../shared/shared.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CreateProductComponent', () => {
   let component: CreateProductComponent;
@@ -8,7 +11,8 @@ describe('CreateProductComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateProductComponent ]
+      declarations: [ CreateProductComponent ],
+      imports: [ SharedModule, NoopAnimationsModule, HttpClientTestingModule ]
     })
     .compileComponents();
 
