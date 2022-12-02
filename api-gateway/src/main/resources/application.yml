@@ -3,6 +3,27 @@ micronaut:
     name: apiGateway
   server:
     port: 8180
+    cors:
+      enabled: true
+      single-header: true
+      configurations:
+        web:
+          maxAge: 3600
+          allowedOrigins:
+            - someOrigin
+            - ^http(|s):\/\/(|www\.)(.*?)(|:[0-9]+)$
+          allowedMethods:
+            - HEAD
+            - OPTIONS
+            - POST
+            - GET
+          allowedHeaders:
+            - Content-Type
+            - Authorization
+            - X-Api-Version
+            - X-Amz-Date
+            - X-Api-Key
+            - X-Amz-Security-Token
 rabbitmq:
   uri: amqp://${RABBITMQ_HOST}:5672
   username: "guest"

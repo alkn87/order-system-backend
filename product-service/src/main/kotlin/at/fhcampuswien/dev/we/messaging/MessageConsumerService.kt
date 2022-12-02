@@ -20,11 +20,12 @@ class MessageConsumerService(private val commandBus: CommandBus) {
     fun onReceived(product: ProductDTO) {
         logger.info("product-service - data received: $product")
         commandBus.dispatch(
-            CreateProductCommand(
-                "Coke",
-                2.50,
-                "DRINK"
-            )
+            CreateProductCommand(product.productName, product.productPrice, product.productType)
+//            CreateProductCommand(
+//                "Coke",
+//                2.50,
+//                "DRINK"
+//            )
         )
     }
 }
