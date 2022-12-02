@@ -4,6 +4,7 @@ import at.fhcampuswien.dev.we.cqrs.command.CommandHandler
 import at.fhcampuswien.dev.we.domain.aggregates.Product
 import at.fhcampuswien.dev.we.domain.command.CreateProductCommand
 import at.fhcampuswien.dev.we.repository.ProductRepository
+import io.micronaut.scheduling.annotation.Async
 import jakarta.inject.Singleton
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -13,6 +14,7 @@ open class CreateProductCommandHandler(private val repository: ProductRepository
 
     private val logger: Logger = LoggerFactory.getLogger(CreateProductCommandHandler::class.java)
 
+    @Async
     override fun handle(command: CreateProductCommand) {
         val product = Product(command.productName, command.productPrice, command.productType)
         if (!repository.existsByProductName(command.productName)) {
