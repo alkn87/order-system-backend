@@ -30,3 +30,7 @@ Content-Type: application/json
   "productPrice": 3.33,
   "productType": "DRINK"
 }
+
+###
+GET http://localhost:8180/product
+Content-Type: application/json

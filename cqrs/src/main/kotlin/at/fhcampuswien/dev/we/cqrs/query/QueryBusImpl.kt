@@ -2,8 +2,6 @@ package at.fhcampuswien.dev.we.cqrs.query
 
 import io.micronaut.context.annotation.Prototype
 import jakarta.inject.Inject
-import java.util.function.Function
-import java.util.stream.Collectors.toMap
 
 @Prototype
 class QueryBusImpl(@Inject private val handlers: List<QueryHandler<Query, *>>) : QueryBus {
@@ -11,13 +9,7 @@ class QueryBusImpl(@Inject private val handlers: List<QueryHandler<Query, *>>) :
     private var handlerMap: Map<Class<Query>, QueryHandler<Query, *>> = mutableMapOf()
 
     init {
-        handlerMap = handlers.stream()
-            .collect(
-                toMap(
-                    QueryHandler<Query,*>::queryType,
-                    Function.identity()
-                )
-            )
+        handlerMap = handlers.associateBy { it.queryType }
     }
 
 
