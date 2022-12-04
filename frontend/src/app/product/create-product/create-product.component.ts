@@ -44,11 +44,11 @@ export class CreateProductComponent implements OnInit {
   }
 
   private _onError(error: Error): void{
-    this.toastService.show(error.message);
+    this.toastService.error(error.message);
   }
 
   private _onSuccess(product: ProductDto): void{
-    this.toastService.show("Product with name '" + product.productName + "' was created.");
+    this.toastService.success("Product with name '" + product.productName + "' was created.");
   }
 
 }

@@ -1,10 +1,13 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from './core/auth.guard';
 
 const routes: Routes = [
   {
     path: 'product',
+    canActivate: [AuthGuard],
+    data: {roles: ['service']},
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
   }
 ];

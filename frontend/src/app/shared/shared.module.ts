@@ -8,6 +8,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -32,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     MatSelectModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ]
 })
 export class SharedModule { }

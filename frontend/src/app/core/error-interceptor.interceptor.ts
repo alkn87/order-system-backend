@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError((error: HttpErrorResponse) => {
           if (error.status === 404) {
             this.toastService.error('error: interceptor',
-              'fehler: interceptor: ' + error.message);
+              'error: interceptor: ' + error.message);
           }
           this.toastService.error('error: interceptor: ' + error.message + error.error['errorMessage'],
             'error: interceptor code: ' + error.url);

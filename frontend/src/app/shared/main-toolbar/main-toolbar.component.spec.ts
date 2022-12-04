@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainToolbarComponent } from './main-toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('MainToolbarComponent', () => {
   let component: MainToolbarComponent;
@@ -10,7 +11,8 @@ describe('MainToolbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MainToolbarComponent ],
-      imports: [MatToolbarModule]
+      imports: [MatToolbarModule],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
 

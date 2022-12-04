@@ -24,6 +24,16 @@ micronaut:
             - X-Amz-Date
             - X-Api-Key
             - X-Amz-Security-Token
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        enabled: true
+        signatures:
+          jwks:
+            keycloak:
+              url: 'http://localhost:7475/realms/Order-System/protocol/openid-connect/certs'
+      roles-name: 'groups'
 rabbitmq:
   uri: amqp://${RABBITMQ_HOST}:5672
   username: "guest"
