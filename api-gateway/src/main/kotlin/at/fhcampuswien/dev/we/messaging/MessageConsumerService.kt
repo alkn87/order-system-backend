@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory
 
 @Requires(notEnv = [Environment.TEST])
 @RabbitListener
-class MessageConsumerService {
+class MessageConsumerService(private val webSocket: GatewayServerWebSocket) {
 
     private val logger: Logger = LoggerFactory.getLogger(MessageConsumerService::class.java)
 
     @Queue("gateway-commands")
-    fun update(data: ByteArray) {
-        print(data)
-        logger.info("data: $data")
+    fun update(command: String) {
+        logger.info("data: $command")
+        webSocket.broadcast(command)
     }
 }

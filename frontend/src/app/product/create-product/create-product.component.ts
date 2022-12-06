@@ -27,28 +27,19 @@ export class CreateProductComponent implements OnInit {
   }
 
   createProduct(): void {
-    console.log('happened');
     let product: ProductDto = {
       productName: this.createProductForm.controls['productName'].value,
       productPrice: Number(this.createProductForm.controls['productPrice'].value).valueOf(),
       productType: this.createProductForm.controls['productType'].value,
     }
     this.productService.createProduct(product).subscribe(response => {
-      if( response.hasOwnProperty("code") && response.code.indexOf("ERROR") > -1 ){
-        this._onError(response);
-      } else {
-        this._onSuccess(response);
-        this.createProductForm.reset();
-      }
+      this._onSuccess(response);
+      this.createProductForm.reset();
     });
   }
 
-  private _onError(error: Error): void{
-    this.toastService.error(error.message);
-  }
-
-  private _onSuccess(product: ProductDto): void{
-    this.toastService.success("Product with name '" + product.productName + "' was created.");
+  private _onSuccess(product: ProductDto): void {
+    this.toastService.success('Product with name \'' + product.productName + '\' was created.');
   }
 
 }

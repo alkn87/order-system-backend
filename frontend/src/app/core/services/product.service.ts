@@ -11,8 +11,10 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   createProduct(product: ProductDto): Observable<any> {
-    console.log('here');
-    console.log(product);
     return this.httpClient.post<ProductDto>('http://localhost:8180/product/create', product);
+  }
+
+  getAllProducts(): Observable<ProductDto[]> {
+    return this.httpClient.get<ProductDto[]>('http://localhost:8180/product');
   }
 }

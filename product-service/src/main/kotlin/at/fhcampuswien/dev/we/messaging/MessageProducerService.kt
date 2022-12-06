@@ -6,5 +6,5 @@ import io.micronaut.rabbitmq.annotation.RabbitClient
 @RabbitClient("gateway")
 interface MessageProducerService {
     @Binding("gateway.command")
-    fun send(data: ByteArray)
+    fun send(command: String)
 }

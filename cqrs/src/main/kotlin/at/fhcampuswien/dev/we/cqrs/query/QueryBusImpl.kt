@@ -18,4 +18,8 @@ class QueryBusImpl(@Inject private val handlers: List<QueryHandler<Query, *>>) :
             ?: throw UnsupportedOperationException("Unsupported query: " + busTypeEvent.javaClass)
         return handler.handle(busTypeEvent)
     }
+
+    override fun dispatchAsync(busTypeEvent: Query): Any? {
+        TODO("Not yet implemented")
+    }
 }

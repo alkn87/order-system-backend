@@ -15,7 +15,7 @@ import javax.validation.Valid
 @Controller("/product")
 class ProductController(private val productService: ProductService) {
 
-    @Secured( "manager", "admin", "service" )
+    @Secured( "manager", "admin" )
     @Post("/create")
     fun createProduct(@Valid product: ProductDTO): HttpResponse<ProductDTO> {
         val productResponse = productService.createProduct(product)

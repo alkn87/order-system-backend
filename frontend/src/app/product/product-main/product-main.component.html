@@ -1,4 +1,10 @@
-<p>product-main works!</p>
 
 <app-create-product></app-create-product>
 
+<div>
+  <h1>Product List</h1>
+  <br>
+  <ul>
+    <li *ngFor="let item of $productList | async">{{item.productName}} - {{item.productPrice | currency:'EUR'}}</li>
+  </ul>
+</div>

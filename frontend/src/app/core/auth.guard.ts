@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
 @Injectable({
@@ -11,24 +11,31 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivate {
     super(router, keycloakAngular);
   }
 
-  isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
-    return new Promise((resolve, reject) => {
-      if (!this.authenticated) {
-        this.keycloakAngular.login()
-          .catch(e => console.error(e));
-        return reject(false);
-      }
+  public async isAccessAllowed(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ) {
+    // Force the user to log in if currently unauthenticated.
+    if (!this.authenticated) {
+      await this.keycloakAngular.login({
+        redirectUri: window.location.origin + state.url
+      });
+    }
 
-      const requiredRoles: string[] = route.data['roles'];
-      if (!requiredRoles || requiredRoles.length === 0) {
-        return resolve(true);
-      } else {
-        if (!this.roles || this.roles.length === 0) {
-          resolve(false);
-        }
-        resolve(requiredRoles.every(role => this.roles.indexOf(role) > -1));
-      }
-    });
+    // Get the roles required from the route.
+    const requiredRoles = route.data['roles'];
+    console.log(requiredRoles)
+
+    // Allow the user to proceed if no additional roles are required to access the route.
+    if (!(requiredRoles instanceof Array) || requiredRoles.length === 0) {
+      return true;
+    }
+
+    // Allow the user to proceed if all the required roles are present.
+    // return requiredRoles.every((role) => this.roles.includes(role));
+
+    // Allow the user to proceed if at least one of the required roles are present.
+    return requiredRoles.some((role) => this.roles.includes(role));
   }
 
 }

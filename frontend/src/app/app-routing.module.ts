@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'product',
     canActivate: [AuthGuard],
-    data: {roles: ['service']},
+    data: {roles: ['admin', 'manager']},
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
   }
 ];

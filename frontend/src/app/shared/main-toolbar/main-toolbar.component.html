@@ -1,6 +1,13 @@
 <mat-toolbar color="primary">
-  <span>Order System</span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button [routerLink]="'/product'">Products</button>
-  <span class="example-spacer"></span>
+  <div class="flex space-x-4">
+    <span>Order System</span>
+    <button mat-raised-button [routerLink]="'/product'">Products</button>
+    <div *ngIf="!isAuthenticated">
+      <a mat-button [routerLink]="'/login'"> Login </a>
+    </div>
+    <div *ngIf="isAuthenticated">
+      <a mat-button (click)="logout()"> Logout </a>
+    </div>
+  </div>
+
 </mat-toolbar>
