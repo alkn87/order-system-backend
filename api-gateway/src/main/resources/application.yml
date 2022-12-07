@@ -32,7 +32,7 @@ micronaut:
         signatures:
           jwks:
             keycloak:
-              url: 'http://localhost:7475/realms/Order-System/protocol/openid-connect/certs'
+              url: 'http://${KEYCLOAK_HOST}:8080/realms/Order-System/protocol/openid-connect/certs'
       roles-name: 'groups'
 rabbitmq:
   uri: amqp://${RABBITMQ_HOST}:5672

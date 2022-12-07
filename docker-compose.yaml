@@ -2,17 +2,23 @@ version: '3.3'
 
 services:
     api-gateway:
-        build: ./api-gateway/.
+        build:
+            context: .
+            dockerfile: ./api-gateway/Dockerfile
         ports:
             - "8180:8180"
         container_name: api-gateway
         depends_on:
             - rabbitmq
             - mongo
+            - keycloak
         environment:
+            KEYCLOAK_HOST: "identity-broker"
             RABBITMQ_HOST: "rabbitmq"
     order-service:
-        build: ./order-service/.
+        build:
+            context: .
+            dockerfile: ./order-service/Dockerfile
         ports:
             - "8181:8181"
         container_name: order-service
@@ -21,6 +27,27 @@ services:
             - mongo
         environment:
             RABBITMQ_HOST: "rabbitmq"
+            MONGODB_HOST: "mongo"
+    product-service:
+        build:
+            context: .
+            dockerfile: ./product-service/Dockerfile
+        ports:
+            - "8182:8182"
+        container_name: product-service
+        depends_on:
+            - rabbitmq
+            - mongo
+        environment:
+            RABBITMQ_HOST: "rabbitmq"
+            MONGODB_HOST: "mongo"
+    frontend:
+        build: ./frontend/.
+        ports:
+            - "4200:80"
+        container_name: frontend
+        depends_on:
+            -   keycloak
     rabbitmq:
         image: rabbitmq:3-management
         ports:
@@ -60,7 +87,7 @@ services:
             - KEYCLOAK_ADMIN_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/keycloak/data/import/Order-System-realm.json
         ports:
-            - "7475:8080"
+            - "8080:8080"
         container_name: identity-broker
         deploy:
             resources:

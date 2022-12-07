@@ -35,7 +35,7 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
   return (): Promise<any> => new Promise(async (resolve, reject) => {
     keycloak.init({
       config: {
-        url: 'http://localhost:7475/',
+        url: 'http://localhost:8080/',
         realm: 'Order-System',
         clientId: 'order-system',
       },
