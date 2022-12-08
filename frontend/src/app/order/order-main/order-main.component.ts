@@ -95,7 +95,7 @@ export class OrderMainComponent implements OnInit, OnDestroy {
     }
     this.orderService.createOrder(order).subscribe(response => {
       this.toastService.success('Order \'' + response + '\' was created.');
-      this.orderForm.reset();
+      this.resetOrder();
     });
   }
 

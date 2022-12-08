@@ -4,7 +4,7 @@ import io.micronaut.rabbitmq.annotation.Binding
 import io.micronaut.rabbitmq.annotation.RabbitClient
 
 @RabbitClient("gateway")
-interface MessageProducerService {
+interface GatewayMessageService {
     @Binding("gateway.command")
-    fun send(data: ByteArray)
+    fun send(command: String)
 }

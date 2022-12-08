@@ -41,6 +41,19 @@ services:
         environment:
             RABBITMQ_HOST: "rabbitmq"
             MONGODB_HOST: "mongo"
+    station-service:
+        build:
+            context: .
+            dockerfile: ./station-service/Dockerfile
+        ports:
+            - "8183:8183"
+        container_name: station-service
+        depends_on:
+            - rabbitmq
+            - mongo
+        environment:
+            RABBITMQ_HOST: "rabbitmq"
+            MONGODB_HOST: "mongo"
     frontend:
         build: ./frontend/.
         ports:
