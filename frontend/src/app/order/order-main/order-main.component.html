@@ -19,7 +19,7 @@
           <ng-container *ngFor="let product of $productList | async">
             <div *ngIf="product.productType === group" class="grid grid-cols-4 gap-2 place-content-start">
               <button mat-button (click)="removeProductFromOderItems(product)">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="remove"></mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Remove icon" fontIcon="remove"></mat-icon>
               </button>
               <div class="flex"><span class="self-center">{{product.productName}}</span></div>
               <div class="flex"><span class="self-center">{{product.productPrice}}</span></div>

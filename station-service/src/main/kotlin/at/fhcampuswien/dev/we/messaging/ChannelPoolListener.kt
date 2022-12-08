@@ -11,10 +11,10 @@ class ChannelPoolListener : ChannelInitializer() {
 
         //docs/exchange
         channel.exchangeDeclare("station", "topic", false)
-        channel.queueDeclare("station-commands", false, false, false, null)
+        channel.queueDeclare("station-commands-finish", false, false, false, null)
         channel.queueDeclare("station-queries", false, false, false, null)
         channel.queueDeclare("station-events", false, false, false, null)
-        channel.queueBind("station-commands", "station", "station.command")
+        channel.queueBind("station-commands-finish", "station", "station.command.finish")
         channel.queueBind("station-queries", "station", "station.query")
         channel.queueBind("station-events", "station", "station.event")
     }

@@ -16,6 +16,7 @@ micronaut:
             - HEAD
             - OPTIONS
             - POST
+            - PATCH
             - GET
           allowedHeaders:
             - Content-Type

@@ -4,5 +4,6 @@ enum class OrderStatus {
     CREATED,
     PROCESSING,
     READY,
-    DELIVERED
+    DELIVERED,
+    FINISHED
 }

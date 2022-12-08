@@ -5,4 +5,7 @@ import io.micronaut.data.mongodb.annotation.MongoRepository
 import io.micronaut.data.repository.CrudRepository
 
 @MongoRepository
-interface StationOrderRepository : CrudRepository<StationOrder, String>
+interface StationOrderRepository : CrudRepository<StationOrder, String> {
+    fun getByStationType(stationType: String): List<StationOrder>
+    fun findByOrderId(orderId: String): List<StationOrder>
+}

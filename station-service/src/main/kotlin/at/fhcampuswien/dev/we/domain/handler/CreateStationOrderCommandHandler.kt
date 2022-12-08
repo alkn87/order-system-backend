@@ -24,7 +24,8 @@ open class CreateStationOrderCommandHandler(private val repository: StationOrder
                     command.orderId,
                     it.value.map { item -> StationOrderItem(item.productName, item.quantity) },
                     it.key,
-                    StationOrderStatus.CREATED
+                    StationOrderStatus.CREATED,
+                    command.deliverTo
                 )
                 repository.save(stationOrder)
             }

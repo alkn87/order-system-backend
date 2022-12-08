@@ -6,6 +6,6 @@ import io.micronaut.rabbitmq.annotation.RabbitClient
 
 @RabbitClient("order")
 interface OrderMessageProducerService {
-    @Binding("order.command")
+    @Binding("order.command.create")
     fun send(order: OrderDTO)
 }

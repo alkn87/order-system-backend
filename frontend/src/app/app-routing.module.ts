@@ -15,6 +15,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: ['admin', 'manager', 'service']},
     loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
+  },
+  {
+    path: 'station',
+    canActivate: [AuthGuard],
+    data: {roles: ['admin', 'manager', 'service']},
+    loadChildren: () => import('./station/station.module').then(m => m.StationModule)
   }
 ];
 

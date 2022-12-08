@@ -12,6 +12,7 @@ data class StationOrder(
     var stationOrderItems: List<StationOrderItem>,
     var stationType: String,
     var status: StationOrderStatus,
+    var deliverTo: String,
     @field:Id
     @GeneratedValue
     var id: String? = ""

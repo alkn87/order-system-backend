@@ -93,8 +93,8 @@ export class OrderMainComponent implements OnInit, OnDestroy {
       deliverTo: this.orderForm.controls['deliverTo'].value,
       orderItems: this.orderItemList,
     }
-    this.orderService.createOrder(order).subscribe(response => {
-      this.toastService.success('Order \'' + response + '\' was created.');
+    this.orderService.createOrder(order).subscribe(_ => {
+      this.toastService.success('Order for ' + order.deliverTo + ' was created.');
       this.resetOrder();
     });
   }
