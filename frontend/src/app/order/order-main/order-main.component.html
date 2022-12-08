@@ -1,0 +1,65 @@
+<form [formGroup]="orderForm">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 place-content-center">
+
+    <div class="col-span-1 md:col-span-2 lg:col-span-4 lg:col-start-1 lg:col-end-5">
+      <mat-form-field appearance="fill">
+        <mat-label>Deliver to:</mat-label>
+        <input matInput formControlName="deliverTo">
+        <mat-error *ngIf="orderForm.controls['deliverTo'].invalid">Required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngFor="let group of $productGroup | async" class="col-span-1">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{group}}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <ng-container *ngFor="let product of $productList | async">
+            <div *ngIf="product.productType === group" class="grid grid-cols-4 gap-2 place-content-start">
+              <button mat-button (click)="removeProductFromOderItems(product)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="remove"></mat-icon>
+              </button>
+              <div class="flex"><span class="self-center">{{product.productName}}</span></div>
+              <div class="flex"><span class="self-center">{{product.productPrice}}</span></div>
+              <button mat-button (click)="addProductToOrderItems(product)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon>
+              </button>
+            </div>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Current Order</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngFor="let product of $orderItemListSubject | async">
+          {{product.quantity}} x
+          {{product.productName}}
+        </div>
+        <mat-divider></mat-divider>
+        <div class="flex">
+          <span class="self-center">
+          <ng-container
+            *ngIf="$orderTotalSubject | async as total">{{total.toFixed(2) | currency: 'EUR'}}
+          </ng-container>
+          </span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="flex justify-end space-x-2">
+          <div>
+            <button mat-stroked-button [disabled]="!isValidOrder()" (click)="sendOrder()">Send</button>
+          </div>
+          <div>
+            <button mat-stroked-button (click)="resetOrder()">Cancel</button>
+          </div>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</form>

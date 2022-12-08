@@ -15,7 +15,7 @@ open class CreateOrderCommandHandler(private val orderRepository: OrderRepositor
     private val logger: Logger = LoggerFactory.getLogger(CreateOrderCommandHandler::class.java)
 
     override fun handle(command: CreateOrderCommand) {
-        val order = Order(command.stationId, command.deliverTo, command.orderItems, OrderStatus.CREATED)
+        val order = Order(command.orderAgent, command.deliverTo, command.orderItems, OrderStatus.CREATED)
         orderRepository.save(order)
         logger.info("handled CreateOrderCommand: $command")
     }

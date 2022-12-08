@@ -9,6 +9,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 
@@ -18,6 +21,9 @@ import { RouterLink } from '@angular/router';
   ],
   exports: [
     MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
     MainToolbarComponent,
     MatInputModule,
     MatFormFieldModule,

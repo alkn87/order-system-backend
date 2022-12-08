@@ -41,7 +41,7 @@ class OrderServiceTest {
             )
         )
         assertEquals(1, repository.findAll().count())
-        assertEquals("test22", repository.findAll().first().stationId)
+        assertEquals("test22", repository.findAll().first().orderAgent)
     }
 
     @AfterEach
@@ -52,14 +52,14 @@ class OrderServiceTest {
     companion object {
         @JvmStatic
         @BeforeAll
-        fun setupDatabase(): Unit {
+        fun setupDatabase() {
             MongoDbUtils.startMongoDb()
 
         }
 
         @JvmStatic
         @AfterAll
-        fun closeDatabase(): Unit {
+        fun closeDatabase() {
             MongoDbUtils.closeMongoDb()
 
         }

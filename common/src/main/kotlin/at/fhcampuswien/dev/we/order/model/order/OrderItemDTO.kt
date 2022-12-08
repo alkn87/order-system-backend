@@ -1,8 +1,11 @@
 package at.fhcampuswien.dev.we.order.model.order
 
+import io.micronaut.core.annotation.Introspected
+
+@Introspected
 data class OrderItemDTO(
-    val productId: String,
+    val productType: String,
     val productName: String,
-    val unitPrice: Double,
+    val productPrice: Double,
     val quantity: Int
 )

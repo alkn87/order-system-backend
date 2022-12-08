@@ -7,7 +7,7 @@ import io.micronaut.data.annotation.MappedEntity
 
 @MappedEntity
 data class Order (
-    var stationId: String,
+    var orderAgent: String,
     var deliverTo: String,
     var orderItems: List<OrderItem>,
     var orderStatus: OrderStatus = OrderStatus.CREATED,

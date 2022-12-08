@@ -14,10 +14,10 @@ import javax.validation.Valid
 @Controller("/order")
 class OrderController(private val orderService: OrderService) {
 
-    @Secured("service")
+    @Secured("service", "admin", "manager")
     @Post("/create")
     fun createOrder(@Valid order: OrderDTO): HttpResponse<OrderDTO> {
-        val orderResponse = orderService.createOrder()
+        val orderResponse = orderService.createOrder(order)
         return HttpResponse.created(orderResponse)
     }
 }

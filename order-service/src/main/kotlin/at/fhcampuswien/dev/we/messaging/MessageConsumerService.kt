@@ -22,10 +22,10 @@ class MessageConsumerService(private val commandBus: CommandBus) {
         logger.info("order-service - data received: $order")
         commandBus.dispatch(
             CreateOrderCommand(
-                "Table 1",
-                "station1",
+                order.deliverTo,
+                order.orderAgent,
                 order.orderItems.map {
-                    OrderItem(it.productId, it.productName, it.unitPrice, it.quantity)
+                    OrderItem(it.productType, it.productName, it.productPrice, it.quantity)
                 }
             )
         )
