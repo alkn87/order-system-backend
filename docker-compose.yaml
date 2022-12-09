@@ -2,17 +2,23 @@ version: '3.3'
 
 services:
     api-gateway:
-        build: ./api-gateway/.
+        build:
+            context: .
+            dockerfile: ./api-gateway/Dockerfile
         ports:
             - "8180:8180"
         container_name: api-gateway
         depends_on:
             - rabbitmq
             - mongo
+            - keycloak
         environment:
+            KEYCLOAK_HOST: "identity-broker"
             RABBITMQ_HOST: "rabbitmq"
     order-service:
-        build: ./order-service/.
+        build:
+            context: .
+            dockerfile: ./order-service/Dockerfile
         ports:
             - "8181:8181"
         container_name: order-service
@@ -21,6 +27,40 @@ services:
             - mongo
         environment:
             RABBITMQ_HOST: "rabbitmq"
+            MONGODB_HOST: "mongo"
+    product-service:
+        build:
+            context: .
+            dockerfile: ./product-service/Dockerfile
+        ports:
+            - "8182:8182"
+        container_name: product-service
+        depends_on:
+            - rabbitmq
+            - mongo
+        environment:
+            RABBITMQ_HOST: "rabbitmq"
+            MONGODB_HOST: "mongo"
+    station-service:
+        build:
+            context: .
+            dockerfile: ./station-service/Dockerfile
+        ports:
+            - "8183:8183"
+        container_name: station-service
+        depends_on:
+            - rabbitmq
+            - mongo
+        environment:
+            RABBITMQ_HOST: "rabbitmq"
+            MONGODB_HOST: "mongo"
+    frontend:
+        build: ./frontend/.
+        ports:
+            - "4200:80"
+        container_name: frontend
+        depends_on:
+            -   keycloak
     rabbitmq:
         image: rabbitmq:3-management
         ports:
@@ -36,7 +76,7 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: example
-        
+
     mongo-express:
         image: mongo-express
         restart: always
@@ -46,3 +86,23 @@ services:
             ME_CONFIG_MONGODB_ADMINUSERNAME: root
             ME_CONFIG_MONGODB_ADMINPASSWORD: example
             ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+    keycloak:
+        image: quay.io/keycloak/keycloak:20.0
+        command:
+          [
+              'start-dev --import-realm'
+          ]
+        volumes:
+            - ./realm-config/Order-System-realm.json:/opt/keycloak/data/import/Order-System-realm.json
+        environment:
+            - KEYCLOAK_ADMIN=admin
+            - KEYCLOAK_ADMIN_PASSWORD=admin
+            - KEYCLOAK_IMPORT=/opt/keycloak/data/import/Order-System-realm.json
+        ports:
+            - "8080:8080"
+        container_name: identity-broker
+        deploy:
+            resources:
+                limits:
+                    memory: 512M

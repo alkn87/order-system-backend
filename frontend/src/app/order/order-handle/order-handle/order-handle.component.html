@@ -1,0 +1,47 @@
+<mat-divider></mat-divider>
+<div class="mt-4"><h1>Created Orders</h1></div>
+<div class="mt-4 mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 place-content-center">
+  <mat-card *ngFor="let orderCreated of $ordersCreatedSubject | async">
+    <mat-card-header>
+      <mat-card-title>{{orderCreated.deliverTo}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngFor="let item of orderCreated.orderItems">
+        {{item.quantity}} x
+        {{item.productName}}
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex justify-end space-x-2">
+        <div>
+          <button mat-button [disabled]="true">Cancel</button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<mat-divider></mat-divider>
+<div class="mt-4"><h1>Delivered Orders</h1></div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 place-content-center">
+  <mat-card *ngFor="let orderDelivered of $ordersDeliveredSubject | async">
+    <mat-card-header>
+      <mat-card-title class="text-green-600">Order - {{orderDelivered.deliverTo}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngFor="let item of orderDelivered.orderItems">
+        {{item.quantity}} x
+        {{item.productName}}
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex justify-end space-x-2">
+        <div>
+          <button mat-button (click)="navigateToBilling(orderDelivered)">
+            <mat-icon aria-hidden="false" aria-label="Invoice icon" fontIcon="price_check"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -36,6 +36,9 @@ dependencies {
         exclude(group = "org.junit", module="junit-jupiter-engine")
     }
 
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+
     kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
@@ -46,6 +49,8 @@ dependencies {
     implementation("javax.inject:javax.inject:1")
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut.rabbitmq:micronaut-rabbitmq")
+    implementation("com.google.code.gson:gson:2.10")
+    implementation("io.micronaut.reactor:micronaut-reactor")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     compileOnly("org.graalvm.nativeimage:svm")

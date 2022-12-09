@@ -23,7 +23,7 @@ class ProductRepositoryTest : DatabaseBaseTest() {
 
     @Test
     fun testShouldSaveProduct() {
-        repository.save(Product("Coke", 2.90, "DRINK"))
+        repository.save(Product("Coke", 2.90, "DRINK", "AVAILABLE"))
         assertEquals(1, repository.findAll().count())
         assertTrue(repository.existsByProductName("Coke"))
     }

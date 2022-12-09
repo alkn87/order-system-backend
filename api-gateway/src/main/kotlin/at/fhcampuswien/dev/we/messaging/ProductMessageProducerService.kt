@@ -8,4 +8,7 @@ import io.micronaut.rabbitmq.annotation.RabbitClient
 interface ProductMessageProducerService {
     @Binding("product.command")
     fun send(product: ProductDTO)
+
+    @Binding("product.block")
+    fun sendBlock(product: ProductDTO)
 }

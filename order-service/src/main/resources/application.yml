@@ -11,4 +11,4 @@ rabbitmq:
   username: "guest"
   password: "guest"
 mongodb:
-  uri: mongodb://root:example@localhost:27017/order?authSource=admin
+  uri: mongodb://root:example@${MONGODB_HOST}:27017/order?authSource=admin
