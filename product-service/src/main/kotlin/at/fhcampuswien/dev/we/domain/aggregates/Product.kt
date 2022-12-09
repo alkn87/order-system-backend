@@ -9,6 +9,7 @@ data class Product (
     var productName: String,
     var productPrice: Double,
     var productType: String,
+    var productStatus: String? = "",
     @field:Id
     @GeneratedValue
     var id: String? = ""

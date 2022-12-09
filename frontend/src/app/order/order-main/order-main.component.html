@@ -18,12 +18,14 @@
         <mat-card-content>
           <ng-container *ngFor="let product of $productList | async">
             <div *ngIf="product.productType === group" class="grid grid-cols-4 gap-2 place-content-start">
-              <button mat-button (click)="removeProductFromOderItems(product)">
+              <button mat-button (click)="removeProductFromOderItems(product)"
+                      [disabled]="product.productStatus === 'BLOCKED'">
                 <mat-icon aria-hidden="false" aria-label="Remove icon" fontIcon="remove"></mat-icon>
               </button>
               <div class="flex"><span class="self-center">{{product.productName}}</span></div>
               <div class="flex"><span class="self-center">{{product.productPrice}}</span></div>
-              <button mat-button (click)="addProductToOrderItems(product)">
+              <button mat-button (click)="addProductToOrderItems(product)"
+                      [disabled]="product.productStatus === 'BLOCKED'">
                 <mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"></mat-icon>
               </button>
             </div>

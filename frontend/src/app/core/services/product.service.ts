@@ -17,4 +17,8 @@ export class ProductService {
   getAllProducts(): Observable<ProductDto[]> {
     return this.httpClient.get<ProductDto[]>('http://localhost:8180/product');
   }
+
+  blockProduct(product: ProductDto): Observable<ProductDto> {
+    return this.httpClient.post<ProductDto>('http://localhost:8180/product/block', product);
+  }
 }

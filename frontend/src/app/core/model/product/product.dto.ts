@@ -4,4 +4,5 @@ export interface ProductDto {
   productName: string;
   productPrice: number;
   productType: ProductTypeDto;
+  productStatus?: string;
 }

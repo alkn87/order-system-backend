@@ -15,6 +15,11 @@ class ProductService(
         return product
     }
 
+    fun blockProduct(product: ProductDTO): ProductDTO {
+        messageProducerService.sendBlock(product)
+        return product
+    }
+
     fun getAllProducts(): List<ProductDTO> {
         return productRPCService.getAll("NOP".toByteArray())
     }

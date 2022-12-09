@@ -2,6 +2,7 @@ package at.fhcampuswien.dev.we.messaging
 
 import at.fhcampuswien.dev.we.cqrs.command.CommandBus
 import at.fhcampuswien.dev.we.cqrs.query.QueryBus
+import at.fhcampuswien.dev.we.domain.command.BlockProductCommand
 import at.fhcampuswien.dev.we.domain.command.CreateProductCommand
 import at.fhcampuswien.dev.we.domain.query.GetAllProductsQuery
 import at.fhcampuswien.dev.we.order.model.product.ProductDTO
@@ -23,6 +24,14 @@ class MessageConsumerService(private val commandBus: CommandBus, private val que
         logger.info("product-service - data received: $product")
         commandBus.dispatch(
             CreateProductCommand(product.productName, product.productPrice, product.productType)
+        )
+    }
+
+    @Queue("product-block")
+    fun onReceivedBlock(product: ProductDTO) {
+        logger.info("product-service - data received: $product")
+        commandBus.dispatch(
+            BlockProductCommand(product.productName)
         )
     }
 

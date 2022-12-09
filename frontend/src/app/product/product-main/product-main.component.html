@@ -1,10 +1,35 @@
 
 <app-create-product></app-create-product>
 
-<div>
-  <h1>Product List</h1>
-  <br>
-  <ul>
-    <li *ngFor="let item of $productList | async">{{item.productName}} - {{item.productPrice | currency:'EUR'}}</li>
-  </ul>
+<mat-divider></mat-divider>
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 place-content-center mb-4 mt-4">
+
+  <div *ngFor="let group of $productGroup | async" class="col-span-1">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{group}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <ng-container *ngFor="let product of $productList | async">
+          <div *ngIf="product.productType === group" class="grid grid-cols-3 gap-2 place-content-start">
+            <ng-container *ngIf="product.productStatus === 'BLOCKED'; else blockedFont">
+              <div class="flex"><span class="self-center line-through">{{product.productName}}</span></div>
+            </ng-container>
+            <ng-template #blockedFont>
+              <div class="flex"><span class="self-center">{{product.productName}}</span></div>
+            </ng-template>
+            <div class="flex"><span class="self-center">{{product.productPrice | currency:  'EUR'}}</span></div>
+            <button mat-button (click)="blockProduct(product)">
+              <mat-icon aria-hidden="false" aria-label="Block icon" fontIcon="block"></mat-icon>
+            </button>
+          </div>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
 </div>

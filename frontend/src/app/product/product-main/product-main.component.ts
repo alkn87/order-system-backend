@@ -12,6 +12,7 @@ import { Observable, of } from 'rxjs';
 export class ProductMainComponent implements OnInit, OnDestroy {
 
   $productList: Observable<ProductDto[]> = of([]);
+  $productGroup: Observable<string[]> = of([]);
 
   constructor(private socketService: WebSocketService, private productService: ProductService) {
   }
@@ -20,11 +21,11 @@ export class ProductMainComponent implements OnInit, OnDestroy {
     this.socketService.messages.unsubscribe();
   }
 
-
-
   ngOnInit(): void {
     this.getProductList();
-
+    this.$productList.subscribe(value => {
+      this.buildProductGroups(value);
+    });
     this.socketService.messages.subscribe(msg => {
       if (msg.content === 'UPDATE') {
         this.getProductList();
@@ -32,9 +33,25 @@ export class ProductMainComponent implements OnInit, OnDestroy {
     });
   }
 
+  blockProduct(product: ProductDto) {
+    this.productService.blockProduct(product).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   private getProductList() {
     this.$productList = this.productService.getAllProducts();
   }
 
+  private buildProductGroups(products: ProductDto[]) {
+    const result = this.groupBy(products, 'productType');
+    this.$productGroup = of(Object.keys(result));
+  }
 
+  private groupBy(array: any[], property: string | number) {
+    return array.reduce((grouped, element) => ({
+      ...grouped,
+      [element[property]]: [...(grouped[element[property]] || []), element]
+    }), {})
+  }
 }

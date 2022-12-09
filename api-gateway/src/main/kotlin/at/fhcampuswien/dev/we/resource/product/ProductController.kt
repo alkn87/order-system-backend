@@ -27,4 +27,11 @@ class ProductController(private val productService: ProductService) {
     fun getAllProducts(): HttpResponse<List<ProductDTO>> {
         return HttpResponse.ok(productService.getAllProducts())
     }
+
+    @Secured( "manager", "admin" )
+    @Post("/block")
+    fun blockProduct(@Valid product: ProductDTO): HttpResponse<ProductDTO> {
+        val productResponse = productService.blockProduct(product)
+        return HttpResponse.ok(productResponse)
+    }
 }

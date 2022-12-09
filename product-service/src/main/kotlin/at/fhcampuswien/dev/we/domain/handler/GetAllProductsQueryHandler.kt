@@ -15,7 +15,7 @@ open class GetAllProductsQueryHandler(private val repository: ProductRepository)
     private val logger: Logger = LoggerFactory.getLogger(GetAllProductsQueryHandler::class.java)
 
     override fun handle(query: GetAllProductsQuery): List<ProductDTO> {
-        val result = repository.findAll().toList().map { ProductDTO(it.productName, it.productPrice, it.productType) }
+        val result = repository.findAll().toList().map { ProductDTO(it.productName, it.productPrice, it.productType, it.productStatus) }
         logger.info("handled query!")
         return result
     }
