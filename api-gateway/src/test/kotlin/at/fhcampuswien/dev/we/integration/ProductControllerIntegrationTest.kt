@@ -47,7 +47,8 @@ class ProductControllerIntegrationTest {
         val productCreationRequest = ProductDTO(
             "Coke",
             3.20,
-            "DRINK"
+            "DRINK",
+            "AVAILABLE"
         )
 
         val response = httpClient.toBlocking().exchange(
