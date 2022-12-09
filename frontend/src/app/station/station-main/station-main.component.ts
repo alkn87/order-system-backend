@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '../../core/services/order.service';
 import { Observable, of } from 'rxjs';
 import { StationOrderDto } from '../../core/model/station/station-order.dto';
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './station-main.component.html',
   styleUrls: ['./station-main.component.scss']
 })
-export class StationMainComponent implements OnInit {
+export class StationMainComponent implements OnInit, OnDestroy {
 
   stationForm: FormGroup = new FormGroup({});
 
@@ -23,6 +23,11 @@ export class StationMainComponent implements OnInit {
               private socketService: WebSocketService,
               private toastService: ToastrService) {
   }
+
+  ngOnDestroy(): void {
+    this.socketService.messages.unsubscribe();
+  }
+
 
   ngOnInit(): void {
     this.stationForm = this.formBuilder.group({

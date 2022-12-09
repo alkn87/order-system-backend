@@ -4,4 +4,6 @@ export interface OrderDto {
   orderAgent: string;
   deliverTo: string;
   orderItems: OrderItemDto[];
+  orderStatus?: string;
+  id?: string;
 }

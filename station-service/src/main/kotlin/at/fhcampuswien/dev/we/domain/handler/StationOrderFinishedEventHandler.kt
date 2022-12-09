@@ -31,7 +31,7 @@ open class StationOrderFinishedEventHandler(
             gatewayMessageService.send("UPDATE")
             logger.info("Handled StationOrderFinishedEvent - $event - Order still in progress!")
         } else if (statusPerOrder.size == 1 && statusPerOrder.first() == StationOrderStatus.FINISHED) {
-            orderMessageService.sendOrderFinished(event.orderId)
+            orderMessageService.sendOrderDelivered(event.orderId)
             logger.info("Handled StationOrderFinishedEvent - $event - Order now finished!")
         }
     }

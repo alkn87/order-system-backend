@@ -1,0 +1,65 @@
+<mat-card>
+  <ng-container *ngIf="($orderSubject | async) as order">
+    <mat-card-header>
+      <mat-card-title>{{order.deliverTo}} - {{order.orderStatus}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>Total remaining:
+        <ng-container
+          *ngIf="$orderTotalSubject | async as total; else zeroAmount">{{total.toFixed(2) | currency: 'EUR'}}
+        </ng-container>
+        <ng-template #zeroAmount>
+          {{totalAmount.toFixed(2) | currency: 'EUR'}}
+        </ng-template>
+      </div>
+
+      <div *ngFor="let item of order.orderItems">
+        <a (click)="handlePartialPayment(item)">
+          {{item.quantity}} x
+          {{item.productName}}
+        </a>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div *ngFor="let item of $interimItemsSubject | async">
+          {{item.quantity}} x
+          {{item.productName}}
+      </div>
+      <mat-divider></mat-divider>
+      <div>Part:
+        <ng-container
+          *ngIf="$orderInterimTotalSubject | async as partTotal; else zeroAmount">{{partTotal | currency: 'EUR'}}
+        </ng-container>
+        <ng-template #zeroAmount>
+          {{0 | currency: 'EUR'}}
+        </ng-template>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div class="flex justify-end space-x-2">
+        <div>
+          <button mat-stroked-button (click)="submitOrderFinish()">
+            <mat-icon aria-hidden="false" aria-label="Check icon" fontIcon="check"></mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-stroked-button (click)="clearInterimItems()">
+            <mat-icon aria-hidden="false" aria-label="Check icon" fontIcon="check_circle"></mat-icon>
+          </button>
+        </div>
+        <div>Total remaining:
+          <ng-container
+            *ngIf="$orderTotalSubject | async as total; else zeroAmount">{{total.toFixed(2) | currency: 'EUR'}}
+          </ng-container>
+          <ng-template #zeroAmount>
+            {{totalAmount.toFixed(2) | currency: 'EUR'}}
+          </ng-template>
+        </div>
+      </div>
+    </mat-card-actions>
+  </ng-container>
+
+
+</mat-card>

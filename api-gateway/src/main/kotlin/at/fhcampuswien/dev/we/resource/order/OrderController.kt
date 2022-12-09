@@ -7,12 +7,12 @@ import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Consumes
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Patch
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import io.micronaut.validation.Validated
+import java.util.*
 import javax.validation.Valid
 
 @Secured(SecurityRule.IS_AUTHENTICATED)
@@ -28,6 +28,15 @@ class OrderController(private val orderService: OrderService) {
     }
 
     @Secured("service", "admin", "manager")
+    @Post("/bill")
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
+    fun billOrder(orderId: String): HttpResponse<String> {
+        val orderIdResponse = orderService.billOrder(orderId)
+        return HttpResponse.created(orderIdResponse)
+    }
+
+    @Secured("service", "admin", "manager")
     @Get("/station/{stationType}")
     fun getOrdersByStation(stationType: String): HttpResponse<List<StationOrderDto>> {
         val ordersByStationResponse = orderService.getOrdersByStation(stationType)
@@ -35,6 +44,16 @@ class OrderController(private val orderService: OrderService) {
             return HttpResponse.noContent()
         }
         return HttpResponse.ok(ordersByStationResponse)
+    }
+
+    @Secured("service", "admin", "manager")
+    @Get
+    fun getOrders(): HttpResponse<List<OrderDTO>> {
+        val orderResponse = orderService.getOrders()
+        if (orderResponse.isEmpty()) {
+            return HttpResponse.noContent()
+        }
+        return HttpResponse.ok(orderResponse)
     }
 
     @Secured("service", "admin", "manager")

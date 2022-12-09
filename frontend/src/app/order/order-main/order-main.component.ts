@@ -91,7 +91,7 @@ export class OrderMainComponent implements OnInit, OnDestroy {
     let order: OrderDto = {
       orderAgent: this.keycloakService.getUsername(),
       deliverTo: this.orderForm.controls['deliverTo'].value,
-      orderItems: this.orderItemList,
+      orderItems: this.orderItemList
     }
     this.orderService.createOrder(order).subscribe(_ => {
       this.toastService.success('Order for ' + order.deliverTo + ' was created.');

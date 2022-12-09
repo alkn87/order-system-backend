@@ -8,6 +8,6 @@ interface OrderMessageService {
     @Binding("order.command.update")
     fun sendOrderUpdate(orderId: String)
 
-    @Binding("order.command.finish")
-    fun sendOrderFinished(orderId: String)
+    @Binding("order.command.deliver")
+    fun sendOrderDelivered(orderId: String)
 }
