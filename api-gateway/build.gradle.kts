@@ -54,7 +54,7 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     compileOnly("org.graalvm.nativeimage:svm")
-    testImplementation("org.mockito:mockito-core:4.9.0")
+    testImplementation("org.mockito:mockito-core:4.11.0")
 
 }
 
