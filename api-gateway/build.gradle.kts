@@ -49,7 +49,7 @@ dependencies {
     implementation("javax.inject:javax.inject:1")
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut.rabbitmq:micronaut-rabbitmq")
-    implementation("com.google.code.gson:gson:2.10")
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation("io.micronaut.reactor:micronaut-reactor")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
