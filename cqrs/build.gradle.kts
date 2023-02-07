@@ -1,4 +1,4 @@
-val kotlinVersion=project.properties["kotlinVersion"]
+val kotlinVersion = project.properties["kotlinVersion"]
 
 plugins {
     id("org.jetbrains.kotlin.jvm")
@@ -28,24 +28,18 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     compileOnly("io.micronaut:micronaut-inject:3.8.3")
+
+    implementation("org.slf4j:slf4j-simple")
 }
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
-java {
-    sourceCompatibility = JavaVersion.toVersion("17")
-}
+java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
-tasks {
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
-    }
-    compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }

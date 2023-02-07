@@ -41,8 +41,8 @@ as Docker containers:
 - Database: MongoDB, only one instance, but multiple collections, one for each microservice (simplified Database per
   Service pattern)
 - Keycloak: Used for authentication and as identity provider. Secures the connection between API-Gateway and Frontend.
-  In future development, it should also handle intra service authentication between micro services.
-- RabbitMQ: Message Broker for asynchronous, event based intra service communication. Every microservice registers it's
+  In future development, it should also handle inter service authentication between micro services.
+- RabbitMQ: Message Broker for asynchronous, event based inter service communication. Every microservice registers it's
   own exchange on application startup at the message broker, together with routing keys and queue binding.
 
 ## Get Started - Run the system

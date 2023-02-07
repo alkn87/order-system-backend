@@ -1,4 +1,4 @@
-val kotlinVersion=project.properties["kotlinVersion"]
+val kotlinVersion = project.properties["kotlinVersion"]
 
 plugins {
     id("org.jetbrains.kotlin.jvm")
@@ -28,13 +28,13 @@ micronaut {
 dependencies {
     // shared lib
     implementation(project(":cqrs")) {
-        exclude(group = "org.junit", module="junit-jupiter-api")
-        exclude(group = "org.junit", module="junit-jupiter-engine")
+        exclude(group = "org.junit", module = "junit-jupiter-api")
+        exclude(group = "org.junit", module = "junit-jupiter-engine")
     }
 
     implementation(project(":common")) {
-        exclude(group = "org.junit", module="junit-jupiter-api")
-        exclude(group = "org.junit", module="junit-jupiter-engine")
+        exclude(group = "org.junit", module = "junit-jupiter-api")
+        exclude(group = "org.junit", module = "junit-jupiter-engine")
     }
 
     kapt("io.micronaut:micronaut-http-validation")
@@ -58,25 +58,19 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:1.17.6")
     testImplementation("org.testcontainers:junit-jupiter:1.17.6")
     testImplementation("org.mockito:mockito-core:5.1.1")
+
+    implementation("org.slf4j:slf4j-simple")
 }
 
 
 application {
     mainClass.set("at.fhcampuswien.dev.we.ApplicationKt")
 }
-java {
-    sourceCompatibility = JavaVersion.toVersion("17")
-}
+java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
-tasks {
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
-    }
-    compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
