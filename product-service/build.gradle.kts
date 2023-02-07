@@ -57,7 +57,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers")
     testImplementation("org.testcontainers:testcontainers:1.17.6")
     testImplementation("org.testcontainers:junit-jupiter:1.17.6")
-    testImplementation("org.mockito:mockito-core:4.11.0")
+    testImplementation("org.mockito:mockito-core:5.1.1")
 }
 
 
