@@ -6,5 +6,5 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2" apply false
     id("io.micronaut.application") version "3.7.2" apply false
     id("org.jetbrains.kotlin.kapt") version "1.8.10" apply false
-    id("io.micronaut.library") version "3.7.2" apply false
+    id("io.micronaut.library") version "3.7.3" apply false
 }
