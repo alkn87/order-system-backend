@@ -23,7 +23,7 @@ micronaut {
 
 dependencies {
     annotationProcessor("io.micronaut:micronaut-inject-java:3.8.9")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     implementation(kotlin("stdlib-jdk8"))
     implementation("io.micronaut:micronaut-validation:3.8.8")
