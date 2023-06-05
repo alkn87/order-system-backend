@@ -55,8 +55,8 @@ dependencies {
     compileOnly("org.graalvm.nativeimage:svm")
     testImplementation("org.testcontainers:mongodb")
     testImplementation("org.testcontainers:testcontainers")
-    testImplementation("org.testcontainers:testcontainers:1.18.0")
-    testImplementation("org.testcontainers:junit-jupiter:1.18.0")
+    testImplementation("org.testcontainers:testcontainers:1.18.3")
+    testImplementation("org.testcontainers:junit-jupiter:1.18.3")
 
     implementation("org.slf4j:slf4j-simple")
 }
