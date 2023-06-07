@@ -15,6 +15,7 @@ repositories {
 }
 
 micronaut {
+    version.set("3.9.2")
     runtime("netty")
     testRuntime("junit5")
     processing {
