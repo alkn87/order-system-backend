@@ -1,5 +1,3 @@
-val kotlinVersion = project.properties["kotlinVersion"]
-
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.plugin.allopen")

@@ -1,5 +1,3 @@
-val kotlinVersion = project.properties["kotlinVersion"]
-
 plugins {
     id("io.micronaut.library")
     id("org.jetbrains.kotlin.jvm")
