@@ -1,5 +1,3 @@
-val kotlinVersion = project.properties["kotlinVersion"]
-
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.plugin.allopen")
@@ -17,6 +15,7 @@ repositories {
 }
 
 micronaut {
+    version.set("3.9.2")
     runtime("netty")
     testRuntime("junit5")
     processing {
@@ -43,8 +42,8 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20")
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
     implementation("javax.inject:javax.inject:1")
     implementation("io.micronaut:micronaut-validation")

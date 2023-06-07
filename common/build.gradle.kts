@@ -1,5 +1,3 @@
-val kotlinVersion = project.properties["kotlinVersion"]
-
 plugins {
     id("io.micronaut.library")
     id("org.jetbrains.kotlin.jvm")
@@ -15,6 +13,7 @@ repositories {
 }
 
 micronaut {
+    version.set("3.9.2")
     processing {
         incremental(true)
         annotations("at.fhcampuswien.dev.we.*")
