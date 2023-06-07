@@ -13,6 +13,7 @@ repositories {
 }
 
 micronaut {
+    version.set("3.9.2")
     processing {
         incremental(true)
         annotations("at.fhcampuswien.dev.we.*")
