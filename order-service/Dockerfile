@@ -2,7 +2,7 @@
 ARG BUILD_HOME=/gradle-docker-builder
 
 # Gradle image for the build stage.
-FROM 8.1.0-jdk17-alpine as build-image
+FROM gradle:8-jdk17-alpine as build-image
 
 # Set the working directory.
 ARG BUILD_HOME
