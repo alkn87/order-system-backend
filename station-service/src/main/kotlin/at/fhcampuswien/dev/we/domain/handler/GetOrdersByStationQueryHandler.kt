@@ -1,6 +1,6 @@
 package at.fhcampuswien.dev.we.domain.handler
 
-import at.fhcampuswien.dev.we.StationOrderRepository
+import at.fhcampuswien.dev.we.repository.StationOrderRepository
 import at.fhcampuswien.dev.we.cqrs.query.QueryHandler
 import at.fhcampuswien.dev.we.domain.query.GetOrdersByStationQuery
 import at.fhcampuswien.dev.we.order.model.station.StationOrderDto

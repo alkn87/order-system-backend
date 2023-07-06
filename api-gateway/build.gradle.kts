@@ -42,6 +42,7 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    implementation("io.micronaut:micronaut-management")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20")
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
@@ -50,6 +51,13 @@ dependencies {
     implementation("io.micronaut.rabbitmq:micronaut-rabbitmq")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.7.1")
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.7.1")
+
+
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     compileOnly("org.graalvm.nativeimage:svm")

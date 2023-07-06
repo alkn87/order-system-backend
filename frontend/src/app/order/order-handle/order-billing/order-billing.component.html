@@ -13,7 +13,7 @@
         </ng-template>
       </div>
 
-      <div *ngFor="let item of order.orderItems">
+      <div *ngFor="let item of order.orderItems" class="mt-4 mb-4 text-lg">
         <a (click)="handlePartialPayment(item)">
           {{item.quantity}} x
           {{item.productName}}
@@ -21,7 +21,7 @@
       </div>
 
       <mat-divider></mat-divider>
-      <div *ngFor="let item of $interimItemsSubject | async">
+      <div *ngFor="let item of $interimItemsSubject | async" class="mt-4 mb-4 text-lg">
           {{item.quantity}} x
           {{item.productName}}
       </div>
@@ -37,26 +37,27 @@
 
     </mat-card-content>
 
-    <mat-card-actions>
-      <div class="flex justify-end space-x-2">
-        <div>
+    <mat-card-actions align="end">
+      <div class="flex flex-wrap justify-end space-x-2">
+        <div class="mt-2 mb-2">
           <button mat-stroked-button (click)="submitOrderFinish()">
             <mat-icon aria-hidden="false" aria-label="Check icon" fontIcon="check"></mat-icon>
           </button>
         </div>
-        <div>
+        <div class="mt-2 mb-2">
           <button mat-stroked-button (click)="clearInterimItems()">
             <mat-icon aria-hidden="false" aria-label="Check icon" fontIcon="check_circle"></mat-icon>
           </button>
         </div>
-        <div>Total remaining:
-          <ng-container
-            *ngIf="$orderTotalSubject | async as total; else zeroAmount">{{total.toFixed(2) | currency: 'EUR'}}
-          </ng-container>
-          <ng-template #zeroAmount>
-            {{totalAmount.toFixed(2) | currency: 'EUR'}}
-          </ng-template>
-        </div>
+<!--        <span class="inline-block mt-2 mb-2 align-middle">-->
+<!--          Total remaining:-->
+<!--          <ng-container-->
+<!--                  *ngIf="$orderTotalSubject | async as total; else zeroAmount">{{total.toFixed(2) | currency: 'EUR'}}-->
+<!--          </ng-container>-->
+<!--          <ng-template #zeroAmount>-->
+<!--            {{totalAmount.toFixed(2) | currency: 'EUR'}}-->
+<!--          </ng-template>-->
+<!--        </span>-->
       </div>
     </mat-card-actions>
   </ng-container>

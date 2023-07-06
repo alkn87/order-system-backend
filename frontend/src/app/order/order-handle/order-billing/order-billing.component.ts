@@ -5,7 +5,6 @@ import { OrderDto } from '../../../core/model/order/order.dto';
 import { BehaviorSubject } from 'rxjs';
 import { OrderService } from '../../../core/services/order.service';
 import { OrderItemDto } from '../../../core/model/order/order-item.dto';
-import { OrderStatusDto } from '../../../core/model/order/order-status.dto';
 import { Subject } from 'rxjs/internal/Subject';
 import { ToastrService } from 'ngx-toastr';
 
@@ -45,13 +44,6 @@ export class OrderBillingComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.$orderSubject.next(this.billingStateService.orderForBilling);
-      // this.$orderSubject.next({
-      //   deliverTo: 'T1', orderAgent: 'test user', orderItems: [
-      //     {productName: 'Burger', quantity: 2, productPrice: 3.90, productType: 'FOOD'} as OrderItemDto,
-      //     {productName: 'Salad', quantity: 3, productPrice: 4.20, productType: 'FOOD'} as OrderItemDto,
-      //     {productName: 'Beer', quantity: 2, productPrice: 3.80, productType: 'DRINK'} as OrderItemDto
-      //   ], id: 'aaw3aygs223w3', orderStatus: OrderStatusDto.DELIVERED
-      // } as OrderDto);
     });
   }
 
@@ -70,29 +62,6 @@ export class OrderBillingComponent implements OnInit {
     this.$interimItemsSubject.next(this.interimItems);
   }
 
-  // addToTotalItems(orderItem: OrderItemDto) {
-  //   const index = this.totalItems.findIndex(item => item.productName === orderItem.productName);
-  //   if (index > -1) {
-  //     this.totalItems[index].quantity++;
-  //   } else {
-  //     this.totalItems.push({
-  //       productName: orderItem.productName,
-  //       productPrice: orderItem.productPrice,
-  //       productType: orderItem.productType,
-  //       quantity: 1
-  //     })
-  //   }
-  //   this.$interimItemsSubject.next(this.interimItems);
-  // }
-  //
-  // removeFromInterimItems(orderItem: OrderItemDto) {
-  //   const index = this.interimItems.findIndex(item => item.productName === orderItem.productName);
-  //   if (index > -1) {
-  //     this.interimItems[index].quantity > 1 ? this.interimItems[index].quantity-- : this.interimItems.splice(index, 1);
-  //     this.$interimItemsSubject.next(this.interimItems);
-  //   }
-  // }
-
   removeFromTotalItems(orderItem: OrderItemDto) {
     const index = this.totalItems.findIndex(item => item.productName === orderItem.productName);
     if (index > -1) {
@@ -100,7 +69,6 @@ export class OrderBillingComponent implements OnInit {
       this.$totalItemsSubject.next(this.totalItems);
     }
   }
-
 
   handlePartialPayment(item: OrderItemDto) {
     this.addToInterimItems(item);

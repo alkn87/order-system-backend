@@ -19,21 +19,18 @@ class GatewayServerWebSocket(private val broadcaster: WebSocketBroadcaster) {
     private val logger: Logger = LoggerFactory.getLogger(GatewayServerWebSocket::class.java)
 
     @OnOpen
-    fun onOpen(): Publisher<MessageDTO> {
+    fun onOpen() {
         logger.info("onOpen")
-        return broadcaster.broadcast(MessageDTO("api", "Now making announcements!"))
     }
 
     @OnClose
-    fun onClose(): Publisher<MessageDTO> {
+    fun onClose() {
         logger.info("onClose")
-        return broadcaster.broadcast(MessageDTO("api", "Closing!"))
     }
 
     @OnMessage
-    fun onMessage(message: String): Publisher<MessageDTO> {
+    fun onMessage(message: String) {
         logger.info("onMessage: $message")
-        return broadcaster.broadcast(MessageDTO("api", "Message received! - $message"))
     }
 
     fun broadcast(command: String) {

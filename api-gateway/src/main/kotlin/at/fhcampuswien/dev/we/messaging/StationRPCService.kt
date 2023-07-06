@@ -7,7 +7,7 @@ import io.micronaut.rabbitmq.annotation.RabbitProperty
 
 @RabbitClient("station")
 @RabbitProperty(name = "replyTo", value = "amq.rabbitmq.reply-to")
-interface StationRPCService {
+fun interface StationRPCService {
 
     @Binding("station.query")
     fun getAllByStation(stationType: String): List<StationOrderDto>

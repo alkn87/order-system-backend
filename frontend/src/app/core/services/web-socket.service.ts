@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AnonymousSubject, Subject } from 'rxjs/internal/Subject';
 import { map, Observable, Observer } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface WebsocketMessage {
   source: string;
@@ -12,7 +13,7 @@ export interface WebsocketMessage {
 })
 export class WebSocketService {
 
-  WEBSOCKET_SERVER_URL = 'ws://localhost:8180/ws'
+  WEBSOCKET_SERVER_URL = environment.apiWsUrl + '/ws'
 
   private subject: AnonymousSubject<MessageEvent> | undefined;
   public messages: Subject<WebsocketMessage>;

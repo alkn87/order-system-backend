@@ -1,4 +1,4 @@
-package at.fhcampuswien.dev.we
+package at.fhcampuswien.dev.we.repository
 
 import at.fhcampuswien.dev.we.domain.aggregates.StationOrder
 import io.micronaut.data.mongodb.annotation.MongoRepository

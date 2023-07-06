@@ -23,5 +23,6 @@ FROM nginx:latest
 
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /usr/local/app/dist/frontend /usr/share/nginx/html
+COPY --from=build /usr/local/app/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
