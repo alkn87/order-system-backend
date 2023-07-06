@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 
@@ -21,6 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
   ],
   exports: [
     MatButtonModule,
+    MatSidenavModule,
     MatCardModule,
     MatDividerModule,
     MatIconModule,
@@ -34,6 +36,8 @@ import { MatDividerModule } from '@angular/material/divider';
   imports: [
     CommonModule,
     MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
     MatInputModule,
     MatFormFieldModule,
     MatOptionModule,

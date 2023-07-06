@@ -6,9 +6,15 @@ micronaut:
   data:
     mongodb:
       create-collections: true
+  management:
+    health:
+      mongodb:
+        enabled: true
+      rabbitmq:
+        enabled: true
 rabbitmq:
   uri: amqp://${RABBITMQ_HOST}:5672
   username: "guest"
   password: "guest"
 mongodb:
-  uri: mongodb://root:example@${MONGODB_HOST}:27017/order?authSource=admin
+  uri: mongodb://root:example@${MONGODB_HOST}:27017/product?authSource=admin

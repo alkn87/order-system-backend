@@ -1,6 +1,6 @@
 package at.fhcampuswien.dev.we.domain.handler
 
-import at.fhcampuswien.dev.we.StationOrderRepository
+import at.fhcampuswien.dev.we.repository.StationOrderRepository
 import at.fhcampuswien.dev.we.cqrs.command.CommandHandler
 import at.fhcampuswien.dev.we.cqrs.event.EventBus
 import at.fhcampuswien.dev.we.domain.command.FinishStationOrderCommand

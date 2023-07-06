@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { KeycloakService } from 'keycloak-angular';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
   return (): Promise<any> => new Promise(async (resolve, reject) => {
     keycloak.init({
       config: {
-        url: 'http://localhost:8080/',
+        url: environment.keycloak,
         realm: 'Order-System',
         clientId: 'order-system',
       },

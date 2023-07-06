@@ -6,6 +6,12 @@ micronaut:
   data:
     mongodb:
       create-collections: true
+  management:
+    health:
+      mongodb:
+        enabled: true
+      rabbitmq:
+        enabled: true
 rabbitmq:
   uri: amqp://${RABBITMQ_HOST}:5672
   username: "guest"

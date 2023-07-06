@@ -1,6 +1,6 @@
 package at.fhcampuswien.dev.we.domain.handler
 
-import at.fhcampuswien.dev.we.StationOrderRepository
+import at.fhcampuswien.dev.we.repository.StationOrderRepository
 import at.fhcampuswien.dev.we.cqrs.event.AsyncEventHandler
 import at.fhcampuswien.dev.we.domain.event.StationOrderFinishedEvent
 import at.fhcampuswien.dev.we.domain.model.StationOrderStatus

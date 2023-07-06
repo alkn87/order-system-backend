@@ -6,25 +6,28 @@ micronaut:
     cors:
       enabled: true
       single-header: true
-      configurations:
-        web:
-          maxAge: 3600
-          allowedOrigins:
-            - someOrigin
-            - ^http(|s):\/\/(|www\.)(.*?)(|:[0-9]+)$
-          allowedMethods:
-            - HEAD
-            - OPTIONS
-            - POST
-            - PATCH
-            - GET
-          allowedHeaders:
-            - Content-Type
-            - Authorization
-            - X-Api-Version
-            - X-Amz-Date
-            - X-Api-Key
-            - X-Amz-Security-Token
+#      configurations:
+#        web:
+#          maxAge: 3600
+#          allowedMethods:
+#            - HEAD
+#            - OPTIONS
+#            - POST
+#            - PATCH
+#            - GET
+#          allowedHeaders:
+#            - Content-Type
+#            - Authorization
+#            - X-Api-Version
+#            - X-Amz-Date
+#            - X-Api-Key
+#            - X-Amz-Security-Token
+  management:
+    health:
+      mongodb:
+        enabled: true
+      rabbitmq:
+        enabled: true
   security:
     authentication: bearer
     token:

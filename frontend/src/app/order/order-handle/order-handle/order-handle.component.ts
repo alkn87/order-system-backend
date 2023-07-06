@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '../../../core/services/order.service';
-import { WebSocketService } from '../../../core/services/web-socket.service';
 import { Subject } from 'rxjs/internal/Subject';
 import { OrderDto } from '../../../core/model/order/order.dto';
 import { OrderStatusDto } from '../../../core/model/order/order-status.dto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillingStateService } from '../../../core/services/billing-state.service';
+import { UpdateEventService } from '../../../core/services/update-event.service';
 
 @Component({
   selector: 'app-order-handle',
@@ -18,7 +18,7 @@ export class OrderHandleComponent implements OnInit, OnDestroy {
   $ordersDeliveredSubject: Subject<OrderDto[]> = new Subject<OrderDto[]>();
 
   constructor(private orderService: OrderService,
-              private socketService: WebSocketService,
+              private updateEventService: UpdateEventService,
               private billingStateService: BillingStateService,
               private router: Router,
               private route: ActivatedRoute) {
@@ -26,17 +26,23 @@ export class OrderHandleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getOrders();
-    this.socketService.messages.subscribe(msg => {
-      if (msg.content === 'UPDATE') {
-        this.getOrders();
-      }
-    });
+    this.updateEventService.getServerSentEvent()
+      .subscribe({
+        next: (data: MessageEvent) => {
+          console.log('SSE received');
+          console.log(JSON.parse(data.data)['data']);
+          if (JSON.parse(data.data)['data'] === 'UPDATE') {
+            this.getOrders();
+          }
+        },
+        error: () => console.error(`Error: ${this}`)
+      });
   }
 
   ngOnDestroy(): void {
     this.$ordersCreatedSubject.unsubscribe();
     this.$ordersDeliveredSubject.unsubscribe();
-    this.socketService.messages.unsubscribe();
+    this.updateEventService.closeEventSource();
   }
 
   private getOrders() {

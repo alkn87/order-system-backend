@@ -2,6 +2,7 @@ version: '3.3'
 
 services:
     api-gateway:
+        restart: always
         build:
             context: .
             dockerfile: ./api-gateway/Dockerfile
@@ -16,6 +17,7 @@ services:
             KEYCLOAK_HOST: "identity-broker"
             RABBITMQ_HOST: "rabbitmq"
     order-service:
+        restart: always
         build:
             context: .
             dockerfile: ./order-service/Dockerfile
@@ -29,6 +31,7 @@ services:
             RABBITMQ_HOST: "rabbitmq"
             MONGODB_HOST: "mongo"
     product-service:
+        restart: always
         build:
             context: .
             dockerfile: ./product-service/Dockerfile
@@ -42,6 +45,7 @@ services:
             RABBITMQ_HOST: "rabbitmq"
             MONGODB_HOST: "mongo"
     station-service:
+        restart: always
         build:
             context: .
             dockerfile: ./station-service/Dockerfile
@@ -55,6 +59,7 @@ services:
             RABBITMQ_HOST: "rabbitmq"
             MONGODB_HOST: "mongo"
     frontend:
+        restart: always
         build: ./frontend/.
         ports:
             - "4200:80"
@@ -91,9 +96,11 @@ services:
 
     keycloak:
         image: quay.io/keycloak/keycloak:20.0
+        restart: always
         command:
           [
               'start-dev --import-realm'
+#              'import --file /opt/keycloak/data/import/Order-System-realm.json',
           ]
         volumes:
             - ./realm-config/Order-System-realm.json:/opt/keycloak/data/import/Order-System-realm.json
