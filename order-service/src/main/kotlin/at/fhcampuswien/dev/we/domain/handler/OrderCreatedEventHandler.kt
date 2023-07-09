@@ -27,8 +27,10 @@ open class OrderCreatedEventHandler(private val messageService: StationMessageSe
 
     private fun mapToIntegrationEvent(event: OrderCreatedEvent): OrderCreatedIntegrationEvent {
         return OrderCreatedIntegrationEvent(
-            event.orderId,
-            event.orderItems.map { OrderItemDTO(it.productType, it.productName, it.unitPrice, it.quantity) },
-            event.deliverTo)
+            orderId = event.orderId,
+            orderItems = event.orderItems.map { OrderItemDTO(it.productType, it.productName, it.unitPrice, it.quantity) },
+            deliverTo = event.deliverTo,
+            commentFood = event.commentFood.orEmpty(),
+            commentDrink = event.commentDrink.orEmpty())
     }
 }

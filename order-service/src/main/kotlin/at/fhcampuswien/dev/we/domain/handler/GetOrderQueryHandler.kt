@@ -29,6 +29,8 @@ open class GetOrderQueryHandler(private val repository: OrderRepository) : Query
                     )
                 },
                 it.orderStatus.name,
+                null,
+                null,
                 it.id
             )
         }

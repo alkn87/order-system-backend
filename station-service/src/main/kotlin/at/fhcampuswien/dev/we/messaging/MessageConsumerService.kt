@@ -23,7 +23,15 @@ class MessageConsumerService(private val commandBus: CommandBus, private val que
     @Queue("station-events")
     fun onReceived(event: OrderCreatedIntegrationEvent) {
         logger.info("station-service - event received: $event")
-        this.commandBus.dispatch(CreateStationOrderCommand(event.orderId, event.orderItems, event.deliverTo))
+        this.commandBus.dispatch(
+            CreateStationOrderCommand(
+                orderId = event.orderId,
+                orderItems = event.orderItems,
+                deliverTo = event.deliverTo,
+                commentFood = event.commentFood.orEmpty(),
+                commentDrink = event.commentDrink.orEmpty()
+            )
+        )
     }
 
     @Queue("station-queries")

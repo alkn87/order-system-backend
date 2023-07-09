@@ -8,5 +8,6 @@ data class StationOrderDto(
     var stationType: String,
     var status: String,
     var deliverTo: String,
+    var comment: String?,
     val id: String
 )

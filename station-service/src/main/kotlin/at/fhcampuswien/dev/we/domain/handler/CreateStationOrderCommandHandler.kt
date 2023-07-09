@@ -21,11 +21,12 @@ open class CreateStationOrderCommandHandler(private val repository: StationOrder
         groupedOrderItems.forEach {
             run {
                 val stationOrder = StationOrder(
-                    command.orderId,
-                    it.value.map { item -> StationOrderItem(item.productName, item.quantity) },
-                    it.key,
-                    StationOrderStatus.CREATED,
-                    command.deliverTo
+                    orderId = command.orderId,
+                    stationOrderItems = it.value.map { item -> StationOrderItem(item.productName, item.quantity) },
+                    stationType = it.key,
+                    status = StationOrderStatus.CREATED,
+                    deliverTo = command.deliverTo,
+                    comment = if (it.key == "FOOD") {command.commentFood} else {command.commentDrink}
                 )
                 repository.save(stationOrder)
             }
