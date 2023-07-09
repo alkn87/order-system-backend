@@ -9,6 +9,9 @@ WORKDIR /usr/local/app
 # Add the source code to app
 COPY ./ /usr/local/app/
 
+RUN rm -rf /usr/local/app/node_modules
+RUN rm package-lock.json
+
 # Install all the dependencies
 RUN npm install
 
