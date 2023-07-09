@@ -12,5 +12,7 @@ data class OrderDTO(
     @NotBlank
     var orderItems: List<OrderItemDTO>,
     var orderStatus: String?,
+    var commentFood: String?,
+    var commentDrink: String?,
     var id: String?
 )

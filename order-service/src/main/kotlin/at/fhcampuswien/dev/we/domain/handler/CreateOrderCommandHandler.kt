@@ -23,7 +23,15 @@ open class CreateOrderCommandHandler(private val orderRepository: OrderRepositor
         if (savedOrder.id.isNullOrEmpty()) {
             logger.error("When handling command: $command - entity not persisted successfully!")
         } else {
-            eventBus.dispatchAsync(OrderCreatedEvent(savedOrder.id!!, savedOrder.orderItems, savedOrder.deliverTo))
+            eventBus.dispatchAsync(
+                OrderCreatedEvent(
+                    orderId = savedOrder.id!!,
+                    orderItems = savedOrder.orderItems,
+                    deliverTo = savedOrder.deliverTo,
+                    commentFood = command.commentFood.orEmpty(),
+                    commentDrink = command.commentDrink.orEmpty()
+                )
+            )
             logger.info("handled CreateOrderCommand: $command")
         }
 

@@ -28,6 +28,10 @@
                 {{item.productName}}
               </div>
             </ng-container>
+            <div *ngIf="stationOrder.comment" class="mt-4">
+              <span class="text-lg underline">Comment:</span><br>
+              {{stationOrder.comment}}
+            </div>
 
           </mat-card-content>
           <mat-card-actions>

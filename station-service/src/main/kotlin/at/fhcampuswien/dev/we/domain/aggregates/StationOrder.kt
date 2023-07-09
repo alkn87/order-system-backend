@@ -13,6 +13,7 @@ data class StationOrder(
     var stationType: String,
     var status: StationOrderStatus,
     var deliverTo: String,
+    var comment: String?,
     @field:Id
     @GeneratedValue
     var id: String? = ""

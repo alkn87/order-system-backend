@@ -51,6 +51,18 @@
           </ng-container>
           </span>
         </div>
+        <div class="mt-4">
+            <mat-form-field appearance="fill" *ngIf="$orderTotalSubject | async">
+                <mat-label>Comment Food</mat-label>
+                <textarea matInput formControlName="commentFood"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="mt-4">
+          <mat-form-field appearance="fill" *ngIf="$orderTotalSubject | async">
+            <mat-label>Comment Drink</mat-label>
+            <textarea matInput formControlName="commentDrink"></textarea>
+          </mat-form-field>
+        </div>
       </mat-card-content>
       <mat-card-actions>
         <div class="flex justify-end space-x-2">

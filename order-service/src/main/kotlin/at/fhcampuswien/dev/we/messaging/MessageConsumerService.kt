@@ -26,11 +26,13 @@ class MessageConsumerService(private val commandBus: CommandBus, private val que
         logger.info("order-service - data received: $order")
         commandBus.dispatch(
             CreateOrderCommand(
-                order.deliverTo,
-                order.orderAgent,
-                order.orderItems.map {
+                deliverTo = order.deliverTo,
+                orderAgent =  order.orderAgent,
+                orderItems =  order.orderItems.map {
                     OrderItem(it.productType, it.productName, it.productPrice, it.quantity)
-                }
+                },
+                commentFood = order.commentFood,
+                commentDrink = order.commentDrink
             )
         )
     }

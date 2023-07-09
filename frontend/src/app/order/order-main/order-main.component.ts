@@ -43,7 +43,9 @@ export class OrderMainComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.orderForm = this.formBuilder.group(
       {
-        deliverTo: this.formBuilder.control('', Validators.required)
+        deliverTo: this.formBuilder.control('', Validators.required),
+        commentFood: this.formBuilder.control(''),
+        commentDrink: this.formBuilder.control(''),
       }
     );
 
@@ -91,6 +93,8 @@ export class OrderMainComponent implements OnInit, OnDestroy {
     let order: OrderDto = {
       orderAgent: this.keycloakService.getUsername(),
       deliverTo: this.orderForm.controls['deliverTo'].value,
+      commentFood: this.orderForm.controls['commentFood'].value,
+      commentDrink: this.orderForm.controls['commentDrink'].value,
       orderItems: this.orderItemList
     }
     this.orderService.createOrder(order).subscribe(_ => {

@@ -22,6 +22,7 @@ open class GetOrdersByStationQueryHandler(private val repository: StationOrderRe
                     it.stationType,
                     it.status.name,
                     it.deliverTo,
+                    it.comment,
                     it.id!!
                 )
         }
