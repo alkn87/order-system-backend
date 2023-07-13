@@ -1,7 +1,7 @@
 <mat-card>
   <ng-container *ngIf="($orderSubject | async) as order">
     <mat-card-header>
-      <mat-card-title>{{order.deliverTo}} - {{order.orderStatus}}</mat-card-title>
+      <mat-card-title>{{order.deliverTo}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div>Total remaining:

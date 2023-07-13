@@ -3,6 +3,9 @@ micronaut:
     name: orderService
   server:
     port: 8181
+    cors:
+      enabled: true
+      single-header: true
   data:
     mongodb:
       create-collections: true

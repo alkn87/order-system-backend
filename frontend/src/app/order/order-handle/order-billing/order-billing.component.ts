@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillingStateService } from '../../../core/services/billing-state.service';
-import { OrderDto } from '../../../core/model/order/order.dto';
 import { BehaviorSubject } from 'rxjs';
 import { OrderService } from '../../../core/services/order.service';
 import { OrderItemDto } from '../../../core/model/order/order-item.dto';
 import { Subject } from 'rxjs/internal/Subject';
 import { ToastrService } from 'ngx-toastr';
+import { OrderBillingDto } from '../../../core/model/order/oder-billing.dto';
 
 @Component({
   selector: 'app-order-billing',
@@ -19,7 +19,7 @@ export class OrderBillingComponent implements OnInit {
   interimItems: OrderItemDto[] = [];
   totalAmount: number = 0;
 
-  $orderSubject: BehaviorSubject<OrderDto> = new BehaviorSubject<OrderDto>({deliverTo: '', orderAgent: '', orderItems: []});
+  $orderSubject: BehaviorSubject<OrderBillingDto> = new BehaviorSubject<OrderBillingDto>({deliverTo: '', orderItems: []});
   $interimItemsSubject: Subject<OrderItemDto[]> = new Subject<OrderItemDto[]>();
   $orderInterimTotalSubject: Subject<number> = new Subject<number>();
   $totalItemsSubject: Subject<OrderItemDto[]> = new Subject<OrderItemDto[]>();
@@ -83,9 +83,9 @@ export class OrderBillingComponent implements OnInit {
   }
 
   submitOrderFinish() {
-    if (this.billingStateService.orderForBilling.id !== undefined) {
-      this.orderService.billOrder(this.billingStateService.orderForBilling.id).subscribe(response => {
-        this.toastService.success('Order with ID ' + response + ' finished.');
+    if (this.billingStateService.orderForBilling.deliverTo !== undefined) {
+      this.orderService.billOrder(this.billingStateService.orderForBilling.deliverTo).subscribe(response => {
+        this.toastService.success('Table ' + response + ' billed.');
         this.router.navigate(['order']);
       });
     }

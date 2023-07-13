@@ -4,6 +4,7 @@ import { OrderDto } from '../model/order/order.dto';
 import { Observable } from 'rxjs';
 import { StationOrderDto } from '../model/station/station-order.dto';
 import { environment } from '../../../environments/environment';
+import { OrderBillingDto } from '../model/order/oder-billing.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,12 @@ export class OrderService {
     return this.httpClient.get<OrderDto[]>(environment.apiBaseUrl + '/order');
   }
 
-  billOrder(orderId: string): Observable<any> {
-    return this.httpClient.post(environment.apiBaseUrl + '/order/bill', orderId, {responseType: 'text'});
+  getOrdersForBilling(): Observable<OrderBillingDto[]> {
+    return this.httpClient.get<OrderBillingDto[]>(environment.apiBaseUrl + '/order/billing');
+  }
+
+  billOrder(deliverTo: string): Observable<any> {
+    return this.httpClient.post(environment.apiBaseUrl + '/order/bill', deliverTo, {responseType: 'text'});
   }
 
   getOrdersByStation(stationType: string): Observable<StationOrderDto[]> {

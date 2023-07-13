@@ -8,5 +8,5 @@ import io.micronaut.data.repository.CrudRepository
 @MongoRepository
 interface OrderRepository : CrudRepository<Order, String> {
     fun findByOrderStatus(orderStatus: OrderStatus): List<Order>
-    fun findByDeliverToAndOrderStatus(deliverTo: String, orderStatus: OrderStatus): List<Order>
+    fun findByOrderStatusAndDeliverTo(orderStatus: OrderStatus, deliverTo: String): List<Order>
 }
