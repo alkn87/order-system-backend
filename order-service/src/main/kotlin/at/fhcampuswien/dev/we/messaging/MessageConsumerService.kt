@@ -6,6 +6,7 @@ import at.fhcampuswien.dev.we.domain.aggregates.OrderItem
 import at.fhcampuswien.dev.we.domain.command.BillOrderCommand
 import at.fhcampuswien.dev.we.domain.command.CreateOrderCommand
 import at.fhcampuswien.dev.we.domain.command.DeliverOrderCommand
+import at.fhcampuswien.dev.we.domain.query.GetOrderForBillingQuery
 import at.fhcampuswien.dev.we.domain.query.GetOrderQuery
 import at.fhcampuswien.dev.we.order.model.order.OrderDTO
 import io.micronaut.context.annotation.Requires
@@ -27,8 +28,8 @@ class MessageConsumerService(private val commandBus: CommandBus, private val que
         commandBus.dispatch(
             CreateOrderCommand(
                 deliverTo = order.deliverTo,
-                orderAgent =  order.orderAgent,
-                orderItems =  order.orderItems.map {
+                orderAgent = order.orderAgent,
+                orderItems = order.orderItems.map {
                     OrderItem(it.productType, it.productName, it.productPrice, it.quantity)
                 },
                 commentFood = order.commentFood,
@@ -38,9 +39,9 @@ class MessageConsumerService(private val commandBus: CommandBus, private val que
     }
 
     @Queue("order-commands-bill")
-    fun onBillReceived(orderId: String) {
-        logger.info("order-commands-bill - data received: $orderId")
-        commandBus.dispatch(BillOrderCommand(orderId))
+    fun onBillReceived(deliverTo: String) {
+        logger.info("order-commands-bill - data received: $deliverTo")
+        commandBus.dispatch(BillOrderCommand(deliverTo))
     }
 
     @Queue("order-commands-update")
@@ -59,5 +60,12 @@ class MessageConsumerService(private val commandBus: CommandBus, private val que
         logger.info("order-queries - rpc call received")
         @Suppress("UNCHECKED_CAST")
         return queryBus.dispatch(GetOrderQuery()) as List<OrderDTO>
+    }
+
+    @Queue("order-queries-for-billing")
+    fun onQueryRpcForBilling(stationType: String): List<OrderDTO> {
+        logger.info("order-queries-for-billing - rpc call received")
+        @Suppress("UNCHECKED_CAST")
+        return queryBus.dispatch(GetOrderForBillingQuery()) as List<OrderDTO>
     }
 }

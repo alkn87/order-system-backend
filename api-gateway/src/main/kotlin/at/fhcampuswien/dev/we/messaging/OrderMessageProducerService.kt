@@ -10,5 +10,5 @@ interface OrderMessageProducerService {
     fun sendCreateCommand(order: OrderDTO)
 
     @Binding("order.command.bill")
-    fun sendBillingCommand(orderId: String)
+    fun sendBillingCommand(deliverTo: String)
 }

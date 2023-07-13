@@ -1,5 +1,6 @@
 package at.fhcampuswien.dev.we.resource.order
 
+import at.fhcampuswien.dev.we.order.model.order.OrderBillingDTO
 import at.fhcampuswien.dev.we.order.model.order.OrderDTO
 import at.fhcampuswien.dev.we.order.model.station.StationOrderDto
 import io.micronaut.http.HttpResponse
@@ -31,8 +32,8 @@ class OrderController(private val orderService: OrderService) {
     @Post("/bill")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    fun billOrder(orderId: String): HttpResponse<String> {
-        val orderIdResponse = orderService.billOrder(orderId)
+    fun billOrder(deliverTo: String): HttpResponse<String> {
+        val orderIdResponse = orderService.billOrder(deliverTo)
         return HttpResponse.created(orderIdResponse)
     }
 
@@ -50,6 +51,16 @@ class OrderController(private val orderService: OrderService) {
     @Get
     fun getOrders(): HttpResponse<List<OrderDTO>> {
         val orderResponse = orderService.getOrders()
+        if (orderResponse.isEmpty()) {
+            return HttpResponse.noContent()
+        }
+        return HttpResponse.ok(orderResponse)
+    }
+
+    @Secured("service", "admin", "manager")
+    @Get("/billing")
+    fun getOrdersForBilling(): HttpResponse<List<OrderBillingDTO>> {
+        val orderResponse = orderService.getOrdersForBilling()
         if (orderResponse.isEmpty()) {
             return HttpResponse.noContent()
         }

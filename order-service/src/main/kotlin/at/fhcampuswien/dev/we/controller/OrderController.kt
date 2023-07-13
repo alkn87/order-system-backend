@@ -2,9 +2,11 @@ package at.fhcampuswien.dev.we.controller
 
 import at.fhcampuswien.dev.we.domain.aggregates.Order
 import at.fhcampuswien.dev.we.domain.aggregates.OrderItem
+import at.fhcampuswien.dev.we.domain.aggregates.OrderStatus
 import at.fhcampuswien.dev.we.domain.aggregates.TestOrder
 import at.fhcampuswien.dev.we.repository.OrderRepository
 import io.micronaut.core.annotation.NonNull
+import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus.CREATED
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
@@ -21,10 +23,6 @@ import javax.validation.constraints.NotNull
 open class OrderController(private val orderRepository: OrderRepository) {
 
     private val logger: Logger = LoggerFactory.getLogger(OrderController::class.java)
-//    private val orderRepository: OrderRepository
-
-//    @Get
-//    fun list(): List<Order> = orderRepository.list()
 
     @Post
     @Status(CREATED)
@@ -41,6 +39,22 @@ open class OrderController(private val orderRepository: OrderRepository) {
                 )
             )
         )
+    }
+
+    @Get("/total")
+    open fun getTotalSales(): HttpResponse<Double> {
+        val orders = orderRepository.findByOrderStatus(OrderStatus.FINISHED)
+        return HttpResponse.ok(orders.flatMap { it.orderItems }.sumOf { it.unitPrice * it.quantity })
+    }
+
+    @Get("/sales")
+    open fun getSales(): HttpResponse<Map<String, Int>> {
+        val orders = orderRepository.findByOrderStatus(OrderStatus.FINISHED)
+        return HttpResponse.ok(orders
+            .flatMap { it.orderItems }
+            .sortedWith(compareBy({ it.productType }, { it.productName }))
+            .groupBy { it.productName }
+            .mapValues { (_, items) -> items.sumOf { it.quantity } })
     }
 
 }

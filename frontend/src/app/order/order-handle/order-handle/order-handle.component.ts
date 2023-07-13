@@ -6,6 +6,7 @@ import { OrderStatusDto } from '../../../core/model/order/order-status.dto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillingStateService } from '../../../core/services/billing-state.service';
 import { UpdateEventService } from '../../../core/services/update-event.service';
+import { OrderBillingDto } from '../../../core/model/order/oder-billing.dto';
 
 @Component({
   selector: 'app-order-handle',
@@ -15,7 +16,7 @@ import { UpdateEventService } from '../../../core/services/update-event.service'
 export class OrderHandleComponent implements OnInit, OnDestroy {
 
   $ordersCreatedSubject: Subject<OrderDto[]> = new Subject<OrderDto[]>();
-  $ordersDeliveredSubject: Subject<OrderDto[]> = new Subject<OrderDto[]>();
+  $ordersDeliveredSubject: Subject<OrderBillingDto[]> = new Subject<OrderBillingDto[]>();
 
   constructor(private orderService: OrderService,
               private updateEventService: UpdateEventService,
@@ -26,6 +27,7 @@ export class OrderHandleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getOrders();
+    this.getOrdersForBilling();
     this.updateEventService.getServerSentEvent()
       .subscribe({
         next: (data: MessageEvent) => {
@@ -48,18 +50,22 @@ export class OrderHandleComponent implements OnInit, OnDestroy {
   private getOrders() {
     this.orderService.getOrders().subscribe(response => {
       const ordersCreated = response.filter(order => order.orderStatus === OrderStatusDto.CREATED);
-      const ordersDelivered = response.filter(order => order.orderStatus === OrderStatusDto.DELIVERED);
 
       this.$ordersCreatedSubject.next(ordersCreated);
-      this.$ordersDeliveredSubject.next(ordersDelivered);
+    });
+  }
+
+  private getOrdersForBilling() {
+    this.orderService.getOrdersForBilling().subscribe(response => {
+      this.$ordersDeliveredSubject.next(response);
     });
   }
 
 
-  navigateToBilling(order: OrderDto) {
-    if (order.id !== undefined) {
+  navigateToBilling(order: OrderBillingDto) {
+    if (order.deliverTo !== undefined) {
       this.billingStateService.setOrderForBilling(order);
-      this.router.navigate(['billing', order.id], {relativeTo: this.route});
+      this.router.navigate(['billing', order.deliverTo], {relativeTo: this.route});
     }
 
   }

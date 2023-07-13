@@ -33,3 +33,20 @@
   </div>
 
 </div>
+
+<mat-divider></mat-divider>
+
+
+<div class="col-span-1">
+  <p class="text-lg">Total Revenue: {{ $totalRevenue | async | currency:  'EUR' }}</p>
+</div>
+
+<mat-divider></mat-divider>
+
+<p class="text-lg">Sold amount:</p>
+<div *ngFor="let item of $totalSales | keyvalue">
+  <p>{{item.key}} | {{item.value}}</p>
+</div>
+
+
+

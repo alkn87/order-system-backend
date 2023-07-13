@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { OrderDto } from '../model/order/order.dto';
+import { OrderBillingDto } from '../model/order/oder-billing.dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BillingStateService {
 
-  orderForBilling: OrderDto = {deliverTo: '', orderAgent: '', orderItems: []};
+  orderForBilling: OrderBillingDto = {deliverTo: '', orderItems: []};
 
-  setOrderForBilling(order: OrderDto) {
+  setOrderForBilling(order: OrderBillingDto) {
     this.orderForBilling = order;
   }
 }

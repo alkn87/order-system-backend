@@ -3,6 +3,7 @@ import { ProductDto } from '../../core/model/product/product.dto';
 import { ProductService } from '../../core/services/product.service';
 import { Observable, of } from 'rxjs';
 import { UpdateEventService } from '../../core/services/update-event.service';
+import { SalesEntryDto } from '../../core/model/sales/sales-entry.dto';
 
 @Component({
   selector: 'app-product-main',
@@ -12,6 +13,8 @@ import { UpdateEventService } from '../../core/services/update-event.service';
 export class ProductMainComponent implements OnInit, OnDestroy {
 
   $productList: Observable<ProductDto[]> = of([]);
+  $totalRevenue: Observable<number> = of(0);
+  $totalSales: SalesEntryDto = {};
   $productGroup: Observable<string[]> = of([]);
 
   constructor(private productService: ProductService,
@@ -24,6 +27,8 @@ export class ProductMainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getProductList();
+    this.getTotalRevenue();
+    this.getTotalSales();
     this.$productList.subscribe(value => {
       this.buildProductGroups(value);
     });
@@ -35,6 +40,8 @@ export class ProductMainComponent implements OnInit, OnDestroy {
           console.log(JSON.parse(data.data)['data']);
           if (JSON.parse(data.data)['data'] === 'UPDATE') {
             this.getProductList();
+            this.getTotalRevenue();
+            this.getTotalSales();
           }
         },
         error: () => console.error(`Error: ${this}`)
@@ -49,6 +56,17 @@ export class ProductMainComponent implements OnInit, OnDestroy {
 
   private getProductList() {
     this.$productList = this.productService.getAllProducts();
+  }
+
+  private getTotalRevenue() {
+    this.$totalRevenue = this.productService.getTotalRevenue();
+  }
+
+  private getTotalSales() {
+    this.productService.getTotalSales().subscribe(data => {
+      this.$totalSales = data;
+      console.log(this.$totalSales)
+    });
   }
 
   private buildProductGroups(products: ProductDto[]) {

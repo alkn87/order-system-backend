@@ -4,6 +4,7 @@ import at.fhcampuswien.dev.we.messaging.OrderMessageProducerService
 import at.fhcampuswien.dev.we.messaging.OrderRPCService
 import at.fhcampuswien.dev.we.messaging.StationMessageService
 import at.fhcampuswien.dev.we.messaging.StationRPCService
+import at.fhcampuswien.dev.we.order.model.order.OrderBillingDTO
 import at.fhcampuswien.dev.we.order.model.order.OrderDTO
 import at.fhcampuswien.dev.we.order.model.station.StationOrderDto
 import jakarta.inject.Singleton
@@ -22,13 +23,17 @@ class OrderService(
         return order
     }
 
-    fun billOrder(orderId: String): String {
-        messageProducerService.sendBillingCommand(orderId)
-        return orderId
+    fun billOrder(deliverTo: String): String {
+        messageProducerService.sendBillingCommand(deliverTo)
+        return deliverTo
     }
 
     fun getOrders(): List<OrderDTO> {
         return orderRPCService.getOrders()
+    }
+
+    fun getOrdersForBilling(): List<OrderBillingDTO> {
+        return orderRPCService.getOrdersForBilling()
     }
 
     fun getOrdersByStation(stationType: String): List<StationOrderDto> {

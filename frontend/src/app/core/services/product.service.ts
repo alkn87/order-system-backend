@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductDto } from '../model/product/product.dto';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { SalesEntryDto } from '../model/sales/sales-entry.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,14 @@ export class ProductService {
 
   getAllProducts(): Observable<ProductDto[]> {
     return this.httpClient.get<ProductDto[]>(environment.apiBaseUrl + '/product');
+  }
+
+  getTotalSales(): Observable<SalesEntryDto> {
+    return this.httpClient.get<SalesEntryDto>(environment.ordersBaseUrl + '/orders/sales');
+  }
+
+  getTotalRevenue(): Observable<number> {
+    return this.httpClient.get<number>(environment.ordersBaseUrl + '/orders/total');
   }
 
   blockProduct(product: ProductDto): Observable<ProductDto> {

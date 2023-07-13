@@ -18,15 +18,11 @@ open class BillOrderCommandHandler(
     private val logger: Logger = LoggerFactory.getLogger(BillOrderCommandHandler::class.java)
 
     override fun handle(command: BillOrderCommand) {
-        repository.findById(command.orderId).ifPresentOrElse(
-            {
+        repository.findByOrderStatusAndDeliverTo(OrderStatus.DELIVERED, command.deliverTo).map {
                 it.orderStatus = OrderStatus.FINISHED
                 repository.update(it)
                 gatewayMessageService.send("UPDATE")
                 logger.info("Handled BillOrderCommand - Order with ID ${it.id} set ${it.orderStatus.name}")
-            },
-            {
-                logger.error("Couldn't handle BillOrderCommand - entity with ID ${command.orderId} not found!")
-            })
+            }
     }
 }
