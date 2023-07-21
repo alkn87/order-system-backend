@@ -47,10 +47,11 @@ class ProductControllerIntegrationTest {
     @Test
     fun shouldSendCreateProductCommandWithValidRequest() {
         val productCreationRequest = ProductDTO(
-            "Coke",
-            3.20,
-            "DRINK",
-            "AVAILABLE"
+            productName = "Coke",
+            productPrice = 3.20,
+            productType = "DRINK",
+            productStatus = "AVAILABLE",
+            id = null
         )
 
         val productIntegrationCommand = ProductIntegrationCommand(
