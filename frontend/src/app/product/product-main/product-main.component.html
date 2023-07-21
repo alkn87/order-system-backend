@@ -15,7 +15,7 @@
 
       <mat-card-content>
         <ng-container *ngFor="let product of $productList | async">
-          <div *ngIf="product.productType === group" class="grid grid-cols-3 gap-2 place-content-start">
+          <div *ngIf="product.productType === group" class="grid grid-cols-4 gap-2 place-content-start">
             <ng-container *ngIf="product.productStatus === 'BLOCKED'; else blockedFont">
               <div class="flex"><span class="self-center line-through">{{product.productName}}</span></div>
             </ng-container>
@@ -25,6 +25,9 @@
             <div class="flex"><span class="self-center">{{product.productPrice | currency:  'EUR'}}</span></div>
             <button mat-button (click)="blockProduct(product)">
               <mat-icon aria-hidden="false" aria-label="Block icon" fontIcon="block"></mat-icon>
+            </button>
+            <button mat-button (click)="deleteProduct(product)">
+              <mat-icon aria-hidden="false" aria-label="Block icon" fontIcon="delete"></mat-icon>
             </button>
           </div>
         </ng-container>

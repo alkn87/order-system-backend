@@ -3,8 +3,10 @@ package at.fhcampuswien.dev.we.resource.product
 import at.fhcampuswien.dev.we.order.model.product.ProductDTO
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Controller
+import io.micronaut.http.annotation.Delete
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.Put
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import io.micronaut.validation.Validated
@@ -20,6 +22,20 @@ class ProductController(private val productService: ProductService) {
     fun createProduct(@Valid product: ProductDTO): HttpResponse<ProductDTO> {
         val productResponse = productService.createProduct(product)
         return HttpResponse.created(productResponse)
+    }
+
+    @Secured( "manager", "admin" )
+    @Put("/update")
+    fun updateProduct(@Valid product: ProductDTO): HttpResponse<ProductDTO> {
+        val productResponse = productService.updateProduct(product)
+        return HttpResponse.ok(productResponse)
+    }
+
+    @Secured( "manager", "admin" )
+    @Delete("/delete")
+    fun deleteProduct(@Valid product: ProductDTO): HttpResponse<ProductDTO> {
+        val productResponse = productService.deleteProduct(product)
+        return HttpResponse.ok(productResponse)
     }
 
     @Secured( "manager", "admin", "service" )

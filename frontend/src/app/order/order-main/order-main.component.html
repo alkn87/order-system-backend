@@ -26,7 +26,7 @@
               <div class="flex"><span class="self-center">{{product.productPrice}}</span></div>
               <button mat-button (click)="addProductToOrderItems(product)"
                       [disabled]="product.productStatus === 'BLOCKED'">
-                <mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"></mat-icon>
+                <mat-icon class="material-icons" aria-hidden="false" aria-label="Add icon" fontIcon="add"></mat-icon>
               </button>
             </div>
           </ng-container>

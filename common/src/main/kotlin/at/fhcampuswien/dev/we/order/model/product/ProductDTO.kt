@@ -11,5 +11,6 @@ data class ProductDTO(
     val productPrice: Double,
     @NotBlank
     val productType: String,
-    val productStatus: String? = ""
-    )
+    val productStatus: String? = "",
+    val id: String? = ""
+)

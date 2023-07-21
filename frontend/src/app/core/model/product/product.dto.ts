@@ -5,4 +5,5 @@ export interface ProductDto {
   productPrice: number;
   productType: ProductTypeDto;
   productStatus?: string;
+  id?: string;
 }

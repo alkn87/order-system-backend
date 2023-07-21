@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { ProductDto } from '../../core/model/product/product.dto';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderItemDto } from '../../core/model/order/order-item.dto';
@@ -63,7 +63,9 @@ export class OrderMainComponent implements OnInit, OnDestroy {
   }
 
   getProductList() {
-    this.$productList = this.productService.getAllProducts();
+    this.$productList = this.productService.getAllProducts().pipe(
+      map(products => products.sort((a, b) => a.productName.localeCompare(b.productName)))
+    );
   }
 
   addProductToOrderItems(product: ProductDto) {

@@ -3,6 +3,8 @@ package at.fhcampuswien.dev.we.integration
 
 import at.fhcampuswien.dev.we.messaging.ProductMessageProducerService
 import at.fhcampuswien.dev.we.messaging.ProductRPCService
+import at.fhcampuswien.dev.we.order.model.integration.command.ProductCommandType
+import at.fhcampuswien.dev.we.order.model.integration.command.ProductIntegrationCommand
 import at.fhcampuswien.dev.we.order.model.product.ProductDTO
 import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
@@ -51,11 +53,16 @@ class ProductControllerIntegrationTest {
             "AVAILABLE"
         )
 
+        val productIntegrationCommand = ProductIntegrationCommand(
+            productCreationRequest,
+            ProductCommandType.CREATE
+        )
+
         val response = httpClient.toBlocking().exchange(
             HttpRequest.POST("/product/create", productCreationRequest),
             ProductDTO::class.java)
         assertEquals(HttpStatus.CREATED.code, response.status.code)
-        verify(productMessageProducerService).send(productCreationRequest)
+        verify(productMessageProducerService).send(productIntegrationCommand)
     }
 
     @Test
