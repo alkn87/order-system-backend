@@ -16,7 +16,12 @@ open class CreateProductCommandHandler(private val repository: ProductRepository
     private val logger: Logger = LoggerFactory.getLogger(CreateProductCommandHandler::class.java)
 
     override fun handle(command: CreateProductCommand) {
-        val product = Product(command.productName, command.productPrice, command.productType, "AVAILABLE")
+        val product = Product(
+            productName = command.productName,
+            productPrice = command.productPrice,
+            productType = command.productType,
+            productStatus = "AVAILABLE"
+        )
         if (!repository.existsByProductName(command.productName)) {
             repository.save(product)
         }

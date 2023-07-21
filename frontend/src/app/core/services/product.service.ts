@@ -10,10 +10,19 @@ import { SalesEntryDto } from '../model/sales/sales-entry.dto';
 })
 export class ProductService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   createProduct(product: ProductDto): Observable<any> {
     return this.httpClient.post<ProductDto>(environment.apiBaseUrl + '/product/create', product);
+  }
+
+  updateProduct(product: ProductDto): Observable<any> {
+    return this.httpClient.put<ProductDto>(environment.apiBaseUrl + '/product/update', product);
+  }
+
+  deleteProduct(product: ProductDto): Observable<any> {
+    return this.httpClient.request<ProductDto>('delete', environment.apiBaseUrl + '/product/delete', { body: product });
   }
 
   getAllProducts(): Observable<ProductDto[]> {

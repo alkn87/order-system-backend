@@ -35,6 +35,7 @@ export class OrderHandleComponent implements OnInit, OnDestroy {
           console.log(JSON.parse(data.data)['data']);
           if (JSON.parse(data.data)['data'] === 'UPDATE') {
             this.getOrders();
+            this.getOrdersForBilling();
           }
         },
         error: () => console.error(`Error: ${this}`)

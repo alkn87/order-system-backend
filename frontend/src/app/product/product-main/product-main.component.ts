@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductDto } from '../../core/model/product/product.dto';
 import { ProductService } from '../../core/services/product.service';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { UpdateEventService } from '../../core/services/update-event.service';
 import { SalesEntryDto } from '../../core/model/sales/sales-entry.dto';
 
@@ -54,8 +54,16 @@ export class ProductMainComponent implements OnInit, OnDestroy {
     });
   }
 
+  deleteProduct(product: ProductDto) {
+    this.productService.deleteProduct(product).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   private getProductList() {
-    this.$productList = this.productService.getAllProducts();
+    this.$productList = this.productService.getAllProducts().pipe(
+      map(products => products.sort((a, b) => a.productName.localeCompare(b.productName)))
+    );
   }
 
   private getTotalRevenue() {
