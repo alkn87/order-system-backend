@@ -54,7 +54,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
 
-    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.7.1")
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.7.3")
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.7.1")
 
 
