@@ -4,5 +4,5 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1" apply false
     id("io.micronaut.application") version "3.7.8" apply false
     id("org.jetbrains.kotlin.kapt") version "1.8.10" apply false
-    id("io.micronaut.library") version "3.7.7" apply false
+    id("io.micronaut.library") version "4.3.5" apply false
 }
